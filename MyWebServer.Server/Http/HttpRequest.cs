@@ -61,17 +61,17 @@
                     break;
                 }
 
-                var indexOfColon = headerLine.IndexOf(":");
+                var headerParts = headerLine.Split(":", 2);
 
-                if (indexOfColon < 0)
+                if (headerParts.Length != 2)
                 {
                     throw new InvalidOperationException("Request is not valid.");
                 }
 
                 var header = new HttpHeader
                 {
-                    Name = headerLine.Substring(0, indexOfColon),
-                    Value = headerLine[(indexOfColon + 1)..].Trim()
+                    Name = headerParts[0],
+                    Value = headerParts[1].Trim()
                 };
 
                 headerCollection.Add(header);
