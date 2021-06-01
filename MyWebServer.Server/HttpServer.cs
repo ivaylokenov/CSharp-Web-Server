@@ -38,7 +38,7 @@
 
                 Console.WriteLine(requestText);
 
-                var request = HttpRequest.Parse(requestText);
+                // var request = HttpRequest.Parse(requestText);
 
                 await WriteResponse(networkStream);
 
@@ -55,7 +55,7 @@
 
             var requestBuilder = new StringBuilder();
 
-            while (networkStream.DataAvailable)
+            do
             {
                 var bytesRead = await networkStream.ReadAsync(buffer, 0, bufferLength);
 
@@ -68,6 +68,7 @@
 
                 requestBuilder.Append(Encoding.UTF8.GetString(buffer, 0, bytesRead));
             }
+            while (networkStream.DataAvailable);
 
             return requestBuilder.ToString();
         }
@@ -89,8 +90,8 @@
 HTTP/1.1 200 OK
 Server: My Web Server
 Date: {DateTime.UtcNow:r}
-Content-Length: {contentLength}
 Content-Type: text/html; charset=UTF-8
+Content-Length: {contentLength}
 
 {content}";
 
