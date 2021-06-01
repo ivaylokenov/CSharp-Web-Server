@@ -15,3 +15,16 @@ Steps to create a similar web server from scratch:
 9. Make sure the HTTP server can populate the routing table
 10. Create specific HTTP response classes - TextResponse, for example
 11. Implement the ToString method for the HTTP response class
+
+Tasks:
+- Fully working routing system
+- Working controllers 
+- Views and HTML
+- Forms and user input
+- Cookies and state 
+- Reflection-based controllers
+- Dependency inversion concepts
+- Model binding
+- Views with models
+- Session and cache
+- Basic authentication
