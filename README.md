@@ -16,8 +16,9 @@ Steps to create a similar web server from scratch:
 10. Create specific HTTP response classes - TextResponse, for example
 11. Implement the ToString method for the HTTP response class
 12. Implement the routing table for storing and retrieving request mapping
-13. Use the routing table in the HTTP server for actual request-response matching
+13. Use the routing table in the HTTP server for actual request-response matching and execution
 14. Separate the URL and parse the query string if it exists
+15. Introduce the option to use the request by storing request-response functions in the routing table
 
 Tasks:
 - Working controllers 
