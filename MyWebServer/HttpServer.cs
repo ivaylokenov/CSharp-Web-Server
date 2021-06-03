@@ -1,12 +1,12 @@
-﻿namespace MyWebServer.Server
+﻿namespace MyWebServer
 {
     using System;
     using System.Net;
     using System.Net.Sockets;
     using System.Text;
     using System.Threading.Tasks;
-    using MyWebServer.Server.Http;
-    using MyWebServer.Server.Routing;
+    using MyWebServer.Http;
+    using MyWebServer.Routing;
 
     public class HttpServer
     {

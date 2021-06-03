@@ -1,7 +1,7 @@
-﻿namespace MyWebServer.Server.Routing
+﻿namespace MyWebServer.Routing
 {
     using System;
-    using MyWebServer.Server.Http;
+    using MyWebServer.Http;
 
     public interface IRoutingTable
     {

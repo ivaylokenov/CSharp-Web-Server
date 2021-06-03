@@ -1,10 +1,10 @@
-﻿namespace MyWebServer.Server.Routing
+﻿namespace MyWebServer.Routing
 {
     using System;
     using System.Collections.Generic;
-    using MyWebServer.Server.Common;
-    using MyWebServer.Server.Http;
-    using MyWebServer.Server.Responses;
+    using MyWebServer.Common;
+    using MyWebServer.Http;
+    using MyWebServer.Responses;
 
     public class RoutingTable : IRoutingTable
     {

@@ -19,13 +19,18 @@ Steps to create a similar web server from scratch:
 13. Use the routing table in the HTTP server for actual request-response matching and execution
 14. Separate the URL and parse the query string if it exists
 15. Introduce the option to use the request by storing request-response functions in the routing table
+16. Introduce base controllers and extract common functionalities
+17. Shorten the route syntax and add support for controllers
 
 Tasks:
-- Working controllers 
+- Redirects
 - Views and HTML
 - Forms and user input
 - Cookies and state 
-- Reflection-based controllers
+- Reflection-based controllers 
+- Conroller attributes
+- Static files
+- Error handling
 - Dependency inversion concepts
 - Model binding
 - Views with models

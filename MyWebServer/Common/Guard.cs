@@ -1,4 +1,4 @@
-﻿namespace MyWebServer.Server.Common
+﻿namespace MyWebServer.Common
 {
     using System;
 
