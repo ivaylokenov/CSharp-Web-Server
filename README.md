@@ -21,9 +21,9 @@ Steps to create a similar web server from scratch:
 15. Introduce the option to use the request by storing request-response functions in the routing table
 16. Introduce base controllers and extract common functionalities
 17. Shorten the route syntax and add support for controllers
+18. Add redirect HTTP response and use the Location header
 
 Tasks:
-- Redirects
 - Views and HTML
 - Forms and user input
 - Cookies and state 
