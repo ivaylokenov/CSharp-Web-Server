@@ -4,8 +4,8 @@
 
     public interface IRoutingTable
     {
-        IRoutingTable Map(string url, HttpMethod method, HttpResponse response);
+        IRoutingTable Map(HttpMethod method, string path, HttpResponse response);
 
-        IRoutingTable MapGet(string url, HttpResponse response);
+        IRoutingTable MapGet(string path, HttpResponse response);
     }
 }

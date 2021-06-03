@@ -17,9 +17,9 @@ Steps to create a similar web server from scratch:
 11. Implement the ToString method for the HTTP response class
 12. Implement the routing table for storing and retrieving request mapping
 13. Use the routing table in the HTTP server for actual request-response matching
+14. Separate the URL and parse the query string if it exists
 
 Tasks:
-- Query strings in requests
 - Working controllers 
 - Views and HTML
 - Forms and user input
