@@ -5,7 +5,7 @@
 
     public abstract class HttpResponse
     {
-        public HttpResponse(HttpStatusCode statusCode)
+        protected HttpResponse(HttpStatusCode statusCode)
         {
             this.StatusCode = statusCode;
 
@@ -16,23 +16,25 @@
         public HttpStatusCode StatusCode { get; init; }
 
         public HttpHeaderCollection Headers { get; } = new HttpHeaderCollection();
-    
+
         public string Content { get; init; }
 
         public override string ToString()
         {
             var result = new StringBuilder();
 
-            result.AppendLine($"HTTP/1.1 {(int)this.StatusCode} {this.StatusCode}");
+            result.Append($"HTTP/1.1 {(int)this.StatusCode} {this.StatusCode}"
+                          + HttpConstants.NewLine);
 
             foreach (var header in this.Headers)
             {
-                result.AppendLine(header.ToString());
+                result.Append(header + HttpConstants.NewLine);
             }
+
 
             if (!string.IsNullOrEmpty(this.Content))
             {
-                result.AppendLine();
+                result.Append(HttpConstants.NewLine);
 
                 result.Append(this.Content);
             }

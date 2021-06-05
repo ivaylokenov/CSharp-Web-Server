@@ -6,7 +6,10 @@
 
     public class HttpRequest
     {
-        private const string NewLine = "\r\n";
+        public HttpRequest() // I am not sure if this is needed
+        {
+            this.Cookies = new List<Cookie>();
+        }
 
         public HttpMethod Method { get; private set; }
 
@@ -14,13 +17,15 @@
 
         public Dictionary<string, string> Query { get; private set; }
 
+        public ICollection<Cookie> Cookies { get; init; }
+
         public HttpHeaderCollection Headers { get; private set; }
 
         public string Body { get; private set; }
 
         public static HttpRequest Parse(string request)
         {
-            var lines = request.Split(NewLine);
+            var lines = request.Split(HttpConstants.NewLine);
 
             var startLine = lines.First().Split(" ");
 
@@ -33,7 +38,7 @@
 
             var bodyLines = lines.Skip(headers.Count + 2).ToArray();
 
-            var body = string.Join(NewLine, bodyLines);
+            var body = string.Join(HttpConstants.NewLine, bodyLines);
 
             return new HttpRequest
             {
@@ -41,7 +46,11 @@
                 Path = path,
                 Query = query,
                 Headers = headers,
-                Body = body
+                Body = body,
+                Cookies = headers
+                    .Any(x => x.Name == HttpConstants.RequestCookieHeader)
+                    ? GetCookies(headers)
+                    : null
             };
         }
 
@@ -99,6 +108,24 @@
             }
 
             return headerCollection;
+        }
+
+        private static ICollection<Cookie> GetCookies
+            (HttpHeaderCollection httpHeaderCollection)
+        {
+            var cookiesAsString = httpHeaderCollection.FirstOrDefault(x =>
+                x.Name == HttpConstants.RequestCookieHeader).Value;
+            var splitCookies = cookiesAsString.Split(new string[] { "; " },
+                StringSplitOptions.RemoveEmptyEntries);
+
+            var cookies = new List<Cookie>();
+
+            foreach (var cookieAsString in splitCookies)
+            {
+                cookies.Add(new Cookie(cookieAsString));
+            }
+
+            return cookies;
         }
     }
 }
