@@ -1,6 +1,7 @@
 ﻿namespace MyWebServer
 {
     using System;
+    using System.Linq;
     using System.Net;
     using System.Net.Sockets;
     using System.Text;
@@ -26,7 +27,7 @@
             routingTableConfiguration(this.routingTable = new RoutingTable());
         }
 
-        public HttpServer(int port, Action<IRoutingTable> routingTable)
+        public HttpServer(int port, Action<IRoutingTable> routingTable) 
             : this("127.0.0.1", port, routingTable)
         {
         }
@@ -47,31 +48,31 @@
             {
                 var connection = await this.listener.AcceptTcpClientAsync();
 
-                _ = Task.Run(async () =>
+                var networkStream = connection.GetStream();
+
+                var requestText = await this.ReadRequest(networkStream);
+
+                var request = HttpRequest.Parse(requestText);
+
+                var response = this.routingTable.ExecuteRequest(request);
+
+                var sessionCookie = request
+                    .Cookies
+                    .FirstOrDefault(x => x.Name == HttpConstants.SessionCookieName);
+
+                if (sessionCookie != null)
                 {
-                    var networkStream = connection.GetStream();
+                    var responseSessionCookie =
+                        new ResponseCookie(sessionCookie.Name, sessionCookie.Value)
+                        {
+                            Path = "/"
+                        };
+                    response.Cookies.Add(responseSessionCookie);
+                }
 
-                    var requestText = await this.ReadRequest(networkStream);
+                await WriteResponse(networkStream, response);
 
-                    try
-                    {
-                        var request = HttpRequest.Parse(requestText);
-
-                        var response = this.routingTable.ExecuteRequest(request);
-
-                        this.PrepareSession(request, response);
-
-                        this.LogPipeline(requestText, response.ToString());
-
-                        await WriteResponse(networkStream, response);
-                    }
-                    catch (Exception exception)
-                    {
-                        await HandleError(networkStream, exception);
-                    }
-
-                    connection.Close();
-                });
+                connection.Close();
             }
         }
 
@@ -102,48 +103,6 @@
             return requestBuilder.ToString();
         }
 
-        private void PrepareSession(HttpRequest request, HttpResponse response)
-        {
-            if (request.Session.IsNew)
-            {
-                response.AddCookie(HttpSession.SessionCookieName, request.Session.Id);
-                request.Session.IsNew = false;
-            }
-        }
-
-        private async Task HandleError(
-            NetworkStream networkStream,
-            Exception exception)
-        {
-            var errorMessage = $"{exception.Message}{Environment.NewLine}{exception.StackTrace}";
-
-            var errorResponse = HttpResponse.ForError(errorMessage);
-
-            await WriteResponse(networkStream, errorResponse);
-        }
-
-        private void LogPipeline(string request, string response)
-        {
-            var separator = new string('-', 50);
-
-            var log = new StringBuilder();
-
-            log.AppendLine();
-            log.AppendLine(separator);
-
-            log.AppendLine("REQUEST:");
-            log.AppendLine(request);
-
-            log.AppendLine();
-
-            log.AppendLine("RESPONSE:");
-            log.AppendLine(response);
-
-            log.AppendLine();
-
-            Console.WriteLine(log);
-        }
-
         private async Task WriteResponse(
             NetworkStream networkStream,
             HttpResponse response)
@@ -151,11 +110,6 @@
             var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
 
             await networkStream.WriteAsync(responseBytes);
-
-            if (response.HasContent)
-            {
-                await networkStream.WriteAsync(response.Content);
-            }
         }
     }
 }

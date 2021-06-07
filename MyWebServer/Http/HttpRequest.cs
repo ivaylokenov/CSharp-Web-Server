@@ -6,9 +6,12 @@
 
     public class HttpRequest
     {
-        public HttpRequest() // I am not sure if this is needed
+        public static Dictionary<string, Dictionary<string, string>>
+            Sessions = new();
+
+        public HttpRequest() 
         {
-            this.Cookies = new List<Cookie>();
+            this.Cookies = new List<Cookie>(); // I am not sure if this is needed
         }
 
         public HttpMethod Method { get; private set; }
@@ -17,7 +20,9 @@
 
         public Dictionary<string, string> Query { get; private set; }
 
-        public ICollection<Cookie> Cookies { get; init; }
+        public Dictionary<string, string> Session { get; set; }
+
+        public ICollection<Cookie> Cookies { get; private set; }
 
         public HttpHeaderCollection Headers { get; private set; }
 
@@ -40,6 +45,8 @@
 
             var body = string.Join(HttpConstants.NewLine, bodyLines);
 
+            var cookiesAndSession = GetCookiesAndSession(headers);
+
             return new HttpRequest
             {
                 Method = method,
@@ -47,10 +54,8 @@
                 Query = query,
                 Headers = headers,
                 Body = body,
-                Cookies = headers
-                    .Any(x => x.Name == HttpConstants.RequestCookieHeader)
-                    ? GetCookies(headers)
-                    : null
+                Cookies = cookiesAndSession.Item1,
+                Session = cookiesAndSession.Item2
             };
         }
 
@@ -110,22 +115,55 @@
             return headerCollection;
         }
 
-        private static ICollection<Cookie> GetCookies
-            (HttpHeaderCollection httpHeaderCollection)
+        private static (ICollection<Cookie>, Dictionary<string, string>)
+            GetCookiesAndSession(HttpHeaderCollection httpHeaderCollection)
         {
-            var cookiesAsString = httpHeaderCollection.FirstOrDefault(x =>
-                x.Name == HttpConstants.RequestCookieHeader).Value;
-            var splitCookies = cookiesAsString.Split(new string[] { "; " },
-                StringSplitOptions.RemoveEmptyEntries);
+            var cookiesAsString =
+                httpHeaderCollection.FirstOrDefault
+                    (x => x.Name == HttpConstants.RequestCookieHeader).Value;
 
             var cookies = new List<Cookie>();
 
-            foreach (var cookieAsString in splitCookies)
+            if (cookiesAsString != null)
             {
-                cookies.Add(new Cookie(cookieAsString));
+                var splitCookies = cookiesAsString.Split(new string[] { "; " },
+                    StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var cookieAsString in splitCookies)
+                {
+                    cookies.Add(new Cookie(cookieAsString));
+                }
             }
 
-            return cookies;
+            var session = GetSession(ref cookies);
+            return (cookies, session);
+        }
+
+        private static Dictionary<string, string> GetSession
+            (ref List<Cookie> cookies)
+        {
+            var sessionCookie = cookies
+                .FirstOrDefault(x => x.Name == HttpConstants.SessionCookieName);
+
+            var session = new Dictionary<string, string>();
+
+            if (sessionCookie == null)
+            {
+                var sessionId = Guid.NewGuid().ToString();
+                Sessions.Add(sessionId, session);
+                cookies.Add(new Cookie(HttpConstants.SessionCookieName, sessionId));
+            }
+            else if (!Sessions.ContainsKey(sessionCookie.Value))
+            {
+                Sessions.Add(sessionCookie.Value, session);
+                // This code keeps the current session "alive"
+            }
+            else
+            {
+                session = Sessions[sessionCookie.Value];
+            }
+
+            return session;
         }
     }
 }

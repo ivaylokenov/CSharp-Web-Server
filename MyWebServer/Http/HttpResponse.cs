@@ -2,6 +2,7 @@
 {
     using System;
     using System.Text;
+    using System.Collections.Generic;
 
     public abstract class HttpResponse
     {
@@ -17,6 +18,8 @@
 
         public HttpHeaderCollection Headers { get; } = new HttpHeaderCollection();
 
+        public List<Cookie> Cookies { get; set; } = new();
+
         public string Content { get; init; }
 
         public override string ToString()
@@ -31,6 +34,11 @@
                 result.Append(header + HttpConstants.NewLine);
             }
 
+            foreach (var cookie in this.Cookies) 
+            {
+                result.Append("Set-Cookie: "
+                              + cookie + HttpConstants.NewLine);
+            }
 
             if (!string.IsNullOrEmpty(this.Content))
             {
