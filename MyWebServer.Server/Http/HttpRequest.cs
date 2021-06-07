@@ -79,10 +79,5 @@
 
             return headerCollection;
         }
-
-        //private static string[] GetStartLine(string request)
-        //{
-
-        //}
     }
 }

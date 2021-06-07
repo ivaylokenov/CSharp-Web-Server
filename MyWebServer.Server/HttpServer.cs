@@ -1,11 +1,11 @@
 ﻿namespace MyWebServer.Server
 {
+    using MyWebServer.Server.Http;
     using System;
     using System.Net;
     using System.Net.Sockets;
     using System.Text;
     using System.Threading.Tasks;
-    using MyWebServer.Server.Http;
 
     public class HttpServer
     {
@@ -27,25 +27,26 @@
 
             Console.WriteLine($"Server started on port {port}...");
             Console.WriteLine("Listening for requests...");
-
+            
             while (true)
             {
                 var connection = await this.listener.AcceptTcpClientAsync();
 
-                var networkStream = connection.GetStream();
+                using (NetworkStream networkStream = connection.GetStream())
+                {
 
-                var requestText = await this.ReadRequest(networkStream);
+                    var requestText = await this.ReadRequest(networkStream);
 
-                Console.WriteLine(requestText);
+                    Console.WriteLine(requestText);
 
-                var request = HttpRequest.Parse(requestText);
+                    var request = HttpRequest.Parse(requestText);
 
-                await WriteResponse(networkStream);
+                    await WriteResponse(networkStream);
+                }
 
                 connection.Close();
             }
         }
-
         private async Task<string> ReadRequest(NetworkStream networkStream)
         {
             var bufferLength = 1024;
