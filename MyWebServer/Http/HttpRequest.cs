@@ -146,6 +146,9 @@
                 .FirstOrDefault(x => x.Name == HttpConstants.SessionCookieName);
 
             var session = new Dictionary<string, string>();
+            // Session is created empty here
+            // but later on in the User Controller we will use it
+            // to log in or log out the user depending on the data the Session contains
 
             if (sessionCookie == null)
             {
