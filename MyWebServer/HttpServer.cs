@@ -1,6 +1,7 @@
 ﻿namespace MyWebServer
 {
     using System;
+    using System.Linq;
     using System.Net;
     using System.Net.Sockets;
     using System.Text;
@@ -54,6 +55,20 @@
                 var request = HttpRequest.Parse(requestText);
 
                 var response = this.routingTable.ExecuteRequest(request);
+
+                var sessionCookie = request
+                    .Cookies
+                    .FirstOrDefault(x => x.Name == HttpConstants.SessionCookieName);
+
+                if (sessionCookie != null)
+                {
+                    var responseSessionCookie =
+                        new ResponseCookie(sessionCookie.Name, sessionCookie.Value)
+                        {
+                            Path = "/"
+                        };
+                    response.Cookies.Add(responseSessionCookie);
+                }
 
                 await WriteResponse(networkStream, response);
 
