@@ -22,11 +22,15 @@ Steps to create a similar web server from scratch:
 16. Introduce base controllers and extract common functionalities
 17. Shorten the route syntax and add support for controllers
 18. Add redirect HTTP response and use the Location header
+19. Add view response class and reuse functionally from the HTML response for setting the content
+20. Add funtionally to find specific views by path and by convention
+21. Make sure the project copies the view files into the output directory
+22. Add functionally in the base controller class to get the view and controller names by convention
 
-Tasks:
-- Views and HTML
+Potential Tasks:
 - Forms and user input
 - Cookies and state 
+- Basic authentication
 - Reflection-based controllers 
 - Conroller attributes
 - Static files
@@ -35,4 +39,4 @@ Tasks:
 - Model binding
 - Views with models
 - Session and cache
-- Basic authentication
+- Include the view files into the assemblies

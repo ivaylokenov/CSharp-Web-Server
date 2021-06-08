@@ -13,7 +13,9 @@
                 .MapGet<HomeController>("/ToCats", c => c.LocalRedirect())
                 .MapGet<HomeController>("/Softuni", c => c.ToSoftUni())
                 .MapGet<AnimalsController>("/Cats", c => c.Cats())
-                .MapGet<AnimalsController>("/Dogs", c => c.Dogs()))
+                .MapGet<AnimalsController>("/Dogs", c => c.Dogs())
+                .MapGet<AnimalsController>("/Bunnies", c => c.Bunnies())
+                .MapGet<AnimalsController>("/Turtles", c => c.Turtles()))
             .Start();
     }
 }
