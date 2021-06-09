@@ -1,5 +1,6 @@
 ﻿namespace MyWebServer.Http
 {
+    using MyWebServer.Http.Collections;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -12,11 +13,11 @@
 
         public string Path { get; private set; }
 
-        public IReadOnlyDictionary<string, string> Query { get; private set; }
+        public QueryCollection Query { get; private set; }
 
-        public IReadOnlyDictionary<string, string> Form { get; private set; }
+        public FormCollection Form { get; private set; }
 
-        public IReadOnlyDictionary<string, HttpHeader> Headers { get; private set; }
+        public HttpHeaderCollection Headers { get; private set; }
 
         public string Body { get; private set; }
 
@@ -60,14 +61,14 @@
                 _ => throw new InvalidOperationException($"Method '{method}' is not supported."),
             };
 
-        private static (string, Dictionary<string, string>) ParseUrl(string url)
+        private static (string, QueryCollection) ParseUrl(string url)
         {
             var urlParts = url.Split('?', 2);
 
             var path = urlParts[0];
             var query = urlParts.Length > 1
-                ? ParseQuery(urlParts[1])
-                : new Dictionary<string, string>();
+                ? new QueryCollection(ParseQuery(urlParts[1]))
+                : new QueryCollection();
 
             return (path, query);
         }
@@ -79,9 +80,9 @@
                 .Where(part => part.Length == 2)
                 .ToDictionary(part => part[0], part => part[1]);
 
-        private static Dictionary<string, HttpHeader> ParseHttpHeaders(IEnumerable<string> headerLines)
+        private static HttpHeaderCollection ParseHttpHeaders(IEnumerable<string> headerLines)
         {
-            var headerCollection = new Dictionary<string, HttpHeader>();
+            var headerCollection = new HttpHeaderCollection();
 
             foreach (var headerLine in headerLines)
             {
@@ -100,23 +101,23 @@
                 var headerName = headerParts[0];
                 var headerValue = headerParts[1].Trim();
 
-                headerCollection.Add(headerName, new HttpHeader(headerName, headerValue));
+                headerCollection.Add(headerName, headerValue);
             }
 
             return headerCollection;
         }
         
-        private static Dictionary<string, string> ParseForm(Dictionary<string, HttpHeader> headers, string body)
+        private static FormCollection ParseForm(HttpHeaderCollection headers, string body)
         {
             var result = new Dictionary<string, string>();
 
-            if (headers.ContainsKey(HttpHeader.ContentType)
-                && headers[HttpHeader.ContentType].Value == HttpContentType.FormUrlEncoded)
+            if (headers.Contains(HttpHeader.ContentType)
+                && headers[HttpHeader.ContentType] == HttpContentType.FormUrlEncoded)
             {
                 result = ParseQuery(body);
             }
 
-            return result;
+            return new FormCollection(result);
         }
     }
 }

@@ -13,16 +13,16 @@
 
         public HttpResponse Cats()
         {
-            const string nameKey = "Name";
-            const string ageKey = "Age";
+            const string nameKey = "Name"; 
+            const string ageKey = "age";
 
             var query = this.Request.Query;
 
-            var catName = query.ContainsKey(nameKey)
-                ? query[nameKey]
+            var catName = query.Contains(nameKey) // Made this case insensitive 
+                ? query[nameKey] // This as well (if this should be removed both the ToLower()-s in QueryCollection class at the indexer and Contains() should be removed)
                 : "the cats";
 
-            var catAge = query.ContainsKey(ageKey)
+            var catAge = query.Contains(ageKey)
                 ? int.Parse(query[ageKey])
                 : 0;
 
