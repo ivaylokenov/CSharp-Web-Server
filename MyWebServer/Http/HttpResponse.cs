@@ -3,7 +3,6 @@
     using MyWebServer.Common;
     using MyWebServer.Http.Collections;
     using System;
-    using System.Collections.Generic;
     using System.Text;
 
     public abstract class HttpResponse

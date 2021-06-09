@@ -6,7 +6,6 @@
     using System.Text;
     using System.Threading.Tasks;
     using MyWebServer.Http;
-    using MyWebServer.Http.Collections;
     using MyWebServer.Routing;
 
     public class HttpServer
@@ -44,15 +43,6 @@
             Console.WriteLine($"Server started on port {port}...");
             Console.WriteLine("Listening for requests...");
 
-            //var form = new FormCollection();
-            //form.Add("name", "pesho");
-            //form.Add("age", "5");
-            //foreach (var item in form)
-            //{
-            //    Console.WriteLine(item);
-            //}
-            //Console.WriteLine(form["name"]);
-            //Console.WriteLine(form["age"]);
             while (true)
             {
                 var connection = await this.listener.AcceptTcpClientAsync();
