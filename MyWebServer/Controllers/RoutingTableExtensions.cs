@@ -36,7 +36,9 @@
             //but it has to be tested. For now, it's working.
             var assembly = Assembly.GetEntryAssembly();
 
-            var controllerTypes = assembly.GetTypes().Where(t => t.Name.EndsWith(ControllerKeyword));
+            //Checks for name ending with controller and inheritance from base Controller type.
+            var controllerTypes = assembly.GetTypes()
+                .Where(t => t.BaseType == typeof(Controller) && t.Name.EndsWith(ControllerKeyword));
 
             foreach (var controller in controllerTypes)
             {
