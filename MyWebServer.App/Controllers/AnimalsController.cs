@@ -10,7 +10,7 @@
             : base(request)
         {
         }
-
+        
         public HttpResponse Cats()
         {
             const string nameKey = "Name";
@@ -35,7 +35,12 @@
             return View(viewModel);
         }
 
-        public HttpResponse Dogs() => View();
+        public HttpResponse Dogs() => View(new DogViewModel
+        {
+            Name = "Rex",
+            Age = 3,
+            Breed = "Street Perfect"
+        });
 
         public HttpResponse Bunnies() => View("Rabbits");
 

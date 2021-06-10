@@ -1,33 +1,39 @@
 ﻿namespace MyWebServer.Controllers
 {
     using MyWebServer.Http;
-    using MyWebServer.Responses;
+    using MyWebServer.Results;
     using System.Runtime.CompilerServices;
 
     public abstract class Controller
     {
         protected Controller(HttpRequest request)
-            => this.Request = request;
+        {
+            this.Request = request;
+
+            this.Response = new HttpResponse(HttpStatusCode.OK);
+        }
 
         protected HttpRequest Request { get; private init; }
 
-        protected HttpResponse Text(string text)
-            => new TextResponse(text);
+        protected HttpResponse Response { get; private init; }
 
-        protected HttpResponse Html(string html)
-            => new HtmlResponse(html);
+        protected ActionResult Text(string text)
+            => new TextResult(this.Response, text);
 
-        protected HttpResponse Redirect(string location)
-            => new RedirectResponse(location);
+        protected ActionResult Html(string html)
+            => new HtmlResult(this.Response, html);
 
-        protected HttpResponse View([CallerMemberName] string viewName = "")
-            => new ViewResponse(viewName, this.GetControllerName(), null);
+        protected ActionResult Redirect(string location)
+            => new RedirectResult(this.Response, location);
 
-        protected HttpResponse View(string viewName, object model)
-            => new ViewResponse(viewName, this.GetControllerName(), model);
+        protected ActionResult View([CallerMemberName] string viewName = "")
+            => new ViewResult(this.Response, viewName, this.GetControllerName(), null);
 
-        protected HttpResponse View(object model, [CallerMemberName] string viewName = "")
-            => new ViewResponse(viewName, this.GetControllerName(), model);
+        protected ActionResult View(string viewName, object model)
+            => new ViewResult(this.Response, viewName, this.GetControllerName(), model);
+
+        protected ActionResult View(object model, [CallerMemberName] string viewName = "")
+            => new ViewResult(this.Response, viewName, this.GetControllerName(), model);
 
         private string GetControllerName()
             => this.GetType().Name

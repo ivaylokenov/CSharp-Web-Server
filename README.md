@@ -28,16 +28,19 @@ Steps to create a similar web server from scratch:
 22. Add functionality in the base controller class to get the view and controller names by convention
 23. Add functionality to parse the request form when the specific content type is present
 24. Add functionality for extracting model data via reflection and replacing it in the HTML
+25. Add functionality for storing and retrieving HTTP cookies
 
 Potential Tasks:
+- Session 
+- Basic authentication
 - Reflection-based controllers 
 - Conroller attributes
-- Cookies and state 
-- Basic authentication
 - Static files
 - Error handling
 - Dependency inversion concepts
 - Model binding
-- Session and cache
+- Cache
 - Include the view files into the assemblies
 - Introduce HttpHeaderCollection, FormCollection, QueryCollection
+- Separate ActionResult and HttpResponse
+- Allow headers with the same name
