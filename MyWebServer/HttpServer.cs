@@ -51,11 +51,22 @@
 
                 var requestText = await this.ReadRequest(networkStream);
 
-                var request = HttpRequest.Parse(requestText);
+                try
+                {
+                    var request = HttpRequest.Parse(requestText);
 
-                var response = this.routingTable.ExecuteRequest(request);
+                    var response = this.routingTable.ExecuteRequest(request);
 
-                await WriteResponse(networkStream, response);
+                    this.PrepareSession(request, response);
+
+                    this.LogPipeline(request, response);
+
+                    await WriteResponse(networkStream, response);
+                }
+                catch (Exception exception)
+                {
+                    await HandleError(networkStream, exception);
+                }
 
                 connection.Close();
             }
@@ -86,6 +97,42 @@
             while (networkStream.DataAvailable);
 
             return requestBuilder.ToString();
+        }
+
+        private void PrepareSession(HttpRequest request, HttpResponse response) 
+            => response.AddCookie(HttpSession.SessionCookieName, request.Session.Id);
+
+        private async Task HandleError(
+            NetworkStream networkStream, 
+            Exception exception)
+        {
+            var errorMessage = $"{exception.Message}{Environment.NewLine}{exception.StackTrace}";
+
+            var errorResponse = HttpResponse.ForError(errorMessage);
+
+            await WriteResponse(networkStream, errorResponse);
+        }
+
+        private void LogPipeline(HttpRequest request, HttpResponse response)
+        {
+            var separator = new string('-', 50);
+
+            var log = new StringBuilder();
+
+            log.AppendLine();
+            log.AppendLine(separator);
+
+            log.AppendLine("REQUEST:");
+            log.AppendLine(request.ToString());
+
+            log.AppendLine();
+
+            log.AppendLine("RESPONSE:");
+            log.AppendLine(response.ToString());
+
+            log.AppendLine();
+
+            Console.WriteLine(log);
         }
 
         private async Task WriteResponse(

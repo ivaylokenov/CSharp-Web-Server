@@ -29,15 +29,16 @@ Steps to create a similar web server from scratch:
 23. Add functionality to parse the request form when the specific content type is present
 24. Add functionality for extracting model data via reflection and replacing it in the HTML
 25. Add functionality for storing and retrieving HTTP cookies
+26. Add functionality for storing HTTP session
+27. Add global exception handling
 
 Potential Tasks:
-- Session 
 - Basic authentication
 - Reflection-based controllers 
 - Conroller attributes
 - Static files
-- Error handling
 - Dependency inversion concepts
+- Advanced view engine features
 - Model binding
 - Cache
 - Include the view files into the assemblies
