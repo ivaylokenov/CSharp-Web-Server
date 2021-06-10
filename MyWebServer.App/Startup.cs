@@ -1,16 +1,18 @@
 ﻿namespace MyWebServer.App
 {
-    using System.Threading.Tasks;
     using MyWebServer;
-    using MyWebServer.Controllers;
     using MyWebServer.App.Controllers;
+    using MyWebServer.Controllers;
+    using System.Threading.Tasks;
 
     public class Startup
     {
         public static async Task Main()
             => await new HttpServer(routes => routes
-                .MapGet<HomeController>()
-                .MapGet<AnimalsController>())
+                .MapControllers()
+                //No support for post functionality to the MapControllers() method as of the moment.
+                //More info in the MapControllers method itself.
+                .MapPost<CatsController>("/Cats/Save", c => c.Save()))
             .Start();
     }
 }
