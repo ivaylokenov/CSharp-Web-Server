@@ -35,13 +35,14 @@ Steps to create a similar web server from scratch:
 29. Add static files option by choosing a public folder and adding all files in it as GET requests in the route table
 30. Make sure the HTTP server handles byte array response bodies
 31. Add automatic controller discovery by using reflection and mapping all public methods into the route table by convention
+32. Add HttpGet and HttpPost attributes to automatically register the HTTP method of the action
+33. Add Authorize attribute and short-circuit the request if there is no authenticated user
 
 Potential Tasks:
-- Conroller attributes - HttpGet, HttpPost, Authorize
-- Dependency inversion concepts
-- Advanced view engine features
 - View layouts
 - Model binding
+- Dependency inversion concepts
+- Advanced view engine features
 - Cache
 - Include the view files into the assemblies
 - Introduce HttpHeaderCollection, FormCollection, QueryCollection
