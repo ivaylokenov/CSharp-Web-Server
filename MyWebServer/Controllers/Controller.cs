@@ -46,16 +46,12 @@
             => new RedirectResult(this.Response, location);
 
         protected ActionResult View([CallerMemberName] string viewName = "")
-            => new ViewResult(this.Response, viewName, this.GetControllerName(), null);
+            => new ViewResult(this.Response, viewName, this.GetType().GetControllerName(), null);
 
         protected ActionResult View(string viewName, object model)
-            => new ViewResult(this.Response, viewName, this.GetControllerName(), model);
+            => new ViewResult(this.Response, viewName, this.GetType().GetControllerName(), model);
 
         protected ActionResult View(object model, [CallerMemberName] string viewName = "")
-            => new ViewResult(this.Response, viewName, this.GetControllerName(), model);
-
-        private string GetControllerName()
-            => this.GetType().Name
-                .Replace(nameof(Controller), string.Empty);
+            => new ViewResult(this.Response, viewName, this.GetType().GetControllerName(), model);
     }
 }

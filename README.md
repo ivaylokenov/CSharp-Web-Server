@@ -32,10 +32,11 @@ Steps to create a similar web server from scratch:
 26. Add functionality for storing HTTP session
 27. Add global exception handling and log all requests and responses in the console
 28. Use session to store the currently authenticated user ID and write helper methods for authentication
+29. Add static files option by choosing a public folder and adding all files in it as GET requests in the route table
+30. Make sure the HTTP server handles byte array response bodies
+31. Add automatic controller discovery by using reflection and mapping all public methods into the route table by convention
 
 Potential Tasks:
-- Static files
-- Reflection-based controllers 
 - Conroller attributes - HttpGet, HttpPost, Authorize
 - Dependency inversion concepts
 - Advanced view engine features

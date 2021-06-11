@@ -13,7 +13,7 @@
 
         public HttpResponse Index() => Text("Hello from Ivo!");
 
-        public HttpResponse LocalRedirect() => Redirect("/Cats");
+        public HttpResponse LocalRedirect() => Redirect("/Animals/Cats");
 
         public HttpResponse ToSoftUni() => Redirect("https://softuni.bg");
 
