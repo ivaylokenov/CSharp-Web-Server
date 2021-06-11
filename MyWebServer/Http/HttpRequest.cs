@@ -62,12 +62,6 @@
             };
         }
 
-        public override string ToString()
-        {
-            // TODO:
-            return null;
-        }
-
         private static HttpMethod ParseMethod(string method) 
             => method.ToUpper() switch
             {
@@ -158,7 +152,10 @@
 
             if (!Sessions.ContainsKey(sessionId))
             {
-                Sessions[sessionId] = new HttpSession(sessionId);
+                Sessions[sessionId] = new HttpSession(sessionId) 
+                { 
+                    IsNew = true 
+                };
             }
 
             return Sessions[sessionId];

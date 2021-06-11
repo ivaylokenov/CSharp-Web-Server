@@ -20,6 +20,8 @@
 
         public string Id { get; init; }
 
+        public bool IsNew { get; set; }
+
         public int Count => this.data.Count;
 
         public string this[string key]
