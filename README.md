@@ -30,15 +30,16 @@ Steps to create a similar web server from scratch:
 24. Add functionality for extracting model data via reflection and replacing it in the HTML
 25. Add functionality for storing and retrieving HTTP cookies
 26. Add functionality for storing HTTP session
-27. Add global exception handling
+27. Add global exception handling and log all requests and responses in the console
+28. Use session to store the currently authenticated user ID and write helper methods for authentication
 
 Potential Tasks:
-- Basic authentication
-- Reflection-based controllers 
-- Conroller attributes
 - Static files
+- Reflection-based controllers 
+- Conroller attributes - HttpGet, HttpPost, Authorize
 - Dependency inversion concepts
 - Advanced view engine features
+- View layouts
 - Model binding
 - Cache
 - Include the view files into the assemblies

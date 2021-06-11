@@ -17,8 +17,11 @@
                 .MapGet<AnimalsController>("/Dogs", c => c.Dogs())
                 .MapGet<AnimalsController>("/Bunnies", c => c.Bunnies())
                 .MapGet<AnimalsController>("/Turtles", c => c.Turtles())
-                .MapGet<AccountController>("/Cookies", c => c.ActionWithCookies())
-                .MapGet<AccountController>("/Session", c => c.ActionWithSession())
+                .MapGet<AccountController>("/Login", c => c.Login())
+                .MapGet<AccountController>("/Logout", c => c.Logout())
+                .MapGet<AccountController>("/Cookies", c => c.CookiesCheck())
+                .MapGet<AccountController>("/Session", c => c.SessionCheck())
+                .MapGet<AccountController>("/Authentication", c => c.AuthenticationCheck())
                 .MapGet<CatsController>("/Cats/Create", c => c.Create())
                 .MapPost<CatsController>("/Cats/Save", c => c.Save()))
             .Start();
