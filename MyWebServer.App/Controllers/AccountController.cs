@@ -6,11 +6,6 @@
 
     public class AccountController : Controller
     {
-        public AccountController(HttpRequest request) 
-            : base(request)
-        {
-        }
-
         public HttpResponse Login()
         {
             // var user = this.db.Users.Find(username, password);
