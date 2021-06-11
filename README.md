@@ -37,10 +37,11 @@ Steps to create a similar web server from scratch:
 31. Add automatic controller discovery by using reflection and mapping all public methods into the route table by convention
 32. Add HttpGet and HttpPost attributes to automatically register the HTTP method of the action
 33. Add Authorize attribute and short-circuit the request if there is no authenticated user
+34. Implement a layout page logic and insert the view content in it
+35. Use reflection to analyze the action parameters and populate them automatically from the request
 
 Potential Tasks:
-- View layouts
-- Model binding
+- Automatic property injection of the request
 - Dependency inversion concepts
 - Advanced view engine features
 - Cache
