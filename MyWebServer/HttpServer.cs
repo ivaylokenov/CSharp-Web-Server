@@ -26,7 +26,7 @@
             routingTableConfiguration(this.routingTable = new RoutingTable());
         }
 
-        public HttpServer(int port, Action<IRoutingTable> routingTable) 
+        public HttpServer(int port, Action<IRoutingTable> routingTable)
             : this("127.0.0.1", port, routingTable)
         {
         }
@@ -47,28 +47,31 @@
             {
                 var connection = await this.listener.AcceptTcpClientAsync();
 
-                var networkStream = connection.GetStream();
-
-                var requestText = await this.ReadRequest(networkStream);
-
-                try
+                _ = Task.Run(async () =>
                 {
-                    var request = HttpRequest.Parse(requestText);
+                    var networkStream = connection.GetStream();
 
-                    var response = this.routingTable.ExecuteRequest(request);
+                    var requestText = await this.ReadRequest(networkStream);
 
-                    this.PrepareSession(request, response);
+                    try
+                    {
+                        var request = HttpRequest.Parse(requestText);
 
-                    this.LogPipeline(request, response);
+                        var response = this.routingTable.ExecuteRequest(request);
 
-                    await WriteResponse(networkStream, response);
-                }
-                catch (Exception exception)
-                {
-                    await HandleError(networkStream, exception);
-                }
+                        this.PrepareSession(request, response);
 
-                connection.Close();
+                        this.LogPipeline(request, response);
+
+                        await WriteResponse(networkStream, response);
+                    }
+                    catch (Exception exception)
+                    {
+                        await HandleError(networkStream, exception);
+                    }
+
+                    connection.Close();
+                });
             }
         }
 
@@ -99,11 +102,11 @@
             return requestBuilder.ToString();
         }
 
-        private void PrepareSession(HttpRequest request, HttpResponse response) 
+        private void PrepareSession(HttpRequest request, HttpResponse response)
             => response.AddCookie(HttpSession.SessionCookieName, request.Session.Id);
 
         private async Task HandleError(
-            NetworkStream networkStream, 
+            NetworkStream networkStream,
             Exception exception)
         {
             var errorMessage = $"{exception.Message}{Environment.NewLine}{exception.StackTrace}";
