@@ -19,6 +19,7 @@
 
             var cookieParts = cookieAsString.Split(new [] { '=' }, 2);
             this.Name = cookieParts[0];
+
             this.Value = cookieParts[1];
         }
 
