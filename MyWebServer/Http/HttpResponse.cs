@@ -1,6 +1,7 @@
 ﻿namespace MyWebServer.Http
 {
     using MyWebServer.Common;
+    using MyWebServer.Http.Collections;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -18,7 +19,7 @@
 
         public HttpStatusCode StatusCode { get; protected set; }
 
-        public IDictionary<string, HttpHeader> Headers { get; } = new Dictionary<string, HttpHeader>(StringComparer.InvariantCultureIgnoreCase);
+        public HeaderCollection Headers { get; } = new ();
 
         public IDictionary<string, HttpCookie> Cookies { get; } = new Dictionary<string, HttpCookie>(StringComparer.InvariantCultureIgnoreCase);
 
@@ -63,7 +64,7 @@
             Guard.AgainstNull(name, nameof(name));
             Guard.AgainstNull(value, nameof(value));
 
-            this.Headers[name] = new HttpHeader(name, value);
+            this.Headers.Add(name, value);
         }
 
         public void AddCookie(string name, string value)
@@ -80,7 +81,7 @@
 
             result.AppendLine($"HTTP/1.1 {(int)this.StatusCode} {this.StatusCode}");
 
-            foreach (var header in this.Headers.Values)
+            foreach (var header in this.Headers)
             {
                 result.AppendLine(header.ToString());
             }
