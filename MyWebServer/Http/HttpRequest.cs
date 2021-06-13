@@ -63,15 +63,18 @@
             };
         }
 
-        private static HttpMethod ParseMethod(string method) 
-            => method.ToUpper() switch
+        private static HttpMethod ParseMethod(string method)
+        {
+            try
             {
-                "GET" => HttpMethod.Get,
-                "POST" => HttpMethod.Post,
-                "PUT" => HttpMethod.Put,
-                "DELETE" => HttpMethod.Delete,
-                _ => throw new InvalidOperationException($"Method '{method}' is not supported."),
-            };
+                return (HttpMethod)Enum.Parse(typeof(HttpMethod), method, true);
+            }
+            catch (Exception)
+            {
+                throw new InvalidOperationException($"Method '{method}' is not supported");
+                //return HttpMethod.Get;
+            }
+        }
 
         private static (string, Dictionary<string, string>) ParseUrl(string url)
         {
