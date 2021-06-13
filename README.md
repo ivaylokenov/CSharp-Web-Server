@@ -28,16 +28,25 @@ Steps to create a similar web server from scratch:
 22. Add functionality in the base controller class to get the view and controller names by convention
 23. Add functionality to parse the request form when the specific content type is present
 24. Add functionality for extracting model data via reflection and replacing it in the HTML
+25. Add functionality for storing and retrieving HTTP cookies
+26. Add functionality for storing HTTP session
+27. Add global exception handling and log all requests and responses in the console
+28. Use session to store the currently authenticated user ID and write helper methods for authentication
+29. Add static files option by choosing a public folder and adding all files in it as GET requests in the route table
+30. Make sure the HTTP server handles byte array response bodies
+31. Add automatic controller discovery by using reflection and mapping all public methods into the route table by convention
+32. Add HttpGet and HttpPost attributes to automatically register the HTTP method of the action
+33. Add Authorize attribute and short-circuit the request if there is no authenticated user
+34. Implement a layout page logic and insert the view content in it
+35. Use reflection to analyze the action parameters and populate them automatically from the request
+36. Remove the required constructor on the base Controller class and populate the request property automatically
 
 Potential Tasks:
-- Reflection-based controllers 
-- Conroller attributes
-- Cookies and state 
-- Basic authentication
-- Static files
-- Error handling
 - Dependency inversion concepts
-- Model binding
-- Session and cache
+- Advanced view engine features
+- Cache
 - Include the view files into the assemblies
 - Introduce HttpHeaderCollection, FormCollection, QueryCollection
+- Separate ActionResult and HttpResponse
+- Allow headers with the same name
+- Make the setter of the controller request private

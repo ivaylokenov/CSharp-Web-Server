@@ -1,15 +1,19 @@
-﻿namespace MyWebServer.Responses
+﻿namespace MyWebServer.Results
 {
     using MyWebServer.Http;
     using System.IO;
     using System.Linq;
 
-    public class ViewResponse : HttpResponse
+    public class ViewResult : ActionResult
     {
         private const char PathSeparator = '/';
 
-        public ViewResponse(string viewName, string controllerName, object model)
-            : base(HttpStatusCode.OK) 
+        public ViewResult(
+            HttpResponse response,
+            string viewName, 
+            string controllerName, 
+            object model)
+            : base(response) 
             => this.GetHtml(viewName, controllerName, model);
 
         private void GetHtml(string viewName, string controllerName, object model)
@@ -35,7 +39,16 @@
                 viewContent = this.PopulateModel(viewContent, model);
             }
 
-            this.PrepareContent(viewContent, HttpContentType.Html);
+            var layoutPath = Path.GetFullPath("./Views/Layout.cshtml");
+
+            if (File.Exists(layoutPath))
+            {
+                var layoutContent = File.ReadAllText(layoutPath);
+
+                viewContent = layoutContent.Replace("@RenderBody()", viewContent);
+            }
+
+            this.SetContent(viewContent, HttpContentType.Html);
         }
 
         private void PrepareMissingViewError(string viewPath)
@@ -44,7 +57,7 @@
 
             var errorMessage = $"View '{viewPath}' was not found.";
 
-            this.PrepareContent(errorMessage, HttpContentType.PlainText);
+            this.SetContent(errorMessage, HttpContentType.PlainText);
         }
 
         private string PopulateModel(string viewContent, object model)
@@ -60,10 +73,7 @@
 
             foreach (var entry in data)
             {
-                const string openingBrackets = "{{";
-                const string closingBrackets = "}}";
-
-                viewContent = viewContent.Replace($"{openingBrackets}{entry.Name}{closingBrackets}", entry.Value.ToString());
+                viewContent = viewContent.Replace($"@Model.{entry.Name}", entry.Value.ToString());
             }
 
             return viewContent;
