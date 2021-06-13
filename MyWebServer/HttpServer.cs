@@ -26,7 +26,7 @@
             routingTableConfiguration(this.routingTable = new RoutingTable());
         }
 
-        public HttpServer(int port, Action<IRoutingTable> routingTable) 
+        public HttpServer(int port, Action<IRoutingTable> routingTable)
             : this("127.0.0.1", port, routingTable)
         {
         }
@@ -46,18 +46,32 @@
             while (true)
             {
                 var connection = await this.listener.AcceptTcpClientAsync();
-				
-				var networkStream = connection.GetStream();
 
-                var requestText = await this.ReadRequest(networkStream);
-				
-                var request = HttpRequest.Parse(requestText);
+                _ = Task.Run(async () =>
+                {
+                    var networkStream = connection.GetStream();
 
-                var response = this.routingTable.ExecuteRequest(request);
+                    var requestText = await this.ReadRequest(networkStream);
 
-                await WriteResponse(networkStream, response);
+                    try
+                    {
+                        var request = HttpRequest.Parse(requestText);
 
-                connection.Close();
+                        var response = this.routingTable.ExecuteRequest(request);
+
+                        this.PrepareSession(request, response);
+
+                        this.LogPipeline(requestText, response.ToString());
+
+                        await WriteResponse(networkStream, response);
+                    }
+                    catch (Exception exception)
+                    {
+                        await HandleError(networkStream, exception);
+                    }
+
+                    connection.Close();
+                });
             }
         }
         private async Task<string> ReadRequest(NetworkStream networkStream)
@@ -87,6 +101,48 @@
             return requestBuilder.ToString();
         }
 
+        private void PrepareSession(HttpRequest request, HttpResponse response)
+        {
+            if (request.Session.IsNew)
+            {
+                response.AddCookie(HttpSession.SessionCookieName, request.Session.Id);
+                request.Session.IsNew = false;
+            }
+        }
+
+        private async Task HandleError(
+            NetworkStream networkStream,
+            Exception exception)
+        {
+            var errorMessage = $"{exception.Message}{Environment.NewLine}{exception.StackTrace}";
+
+            var errorResponse = HttpResponse.ForError(errorMessage);
+
+            await WriteResponse(networkStream, errorResponse);
+        }
+
+        private void LogPipeline(string request, string response)
+        {
+            var separator = new string('-', 50);
+
+            var log = new StringBuilder();
+
+            log.AppendLine();
+            log.AppendLine(separator);
+
+            log.AppendLine("REQUEST:");
+            log.AppendLine(request);
+
+            log.AppendLine();
+
+            log.AppendLine("RESPONSE:");
+            log.AppendLine(response);
+
+            log.AppendLine();
+
+            Console.WriteLine(log);
+        }
+
         private async Task WriteResponse(
             NetworkStream networkStream,
             HttpResponse response)
@@ -94,6 +150,11 @@
             var responseBytes = Encoding.UTF8.GetBytes(response.ToString());
 
             await networkStream.WriteAsync(responseBytes);
+
+            if (response.HasContent)
+            {
+                await networkStream.WriteAsync(response.Content);
+            }
         }
     }
 }

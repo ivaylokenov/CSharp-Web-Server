@@ -5,19 +5,11 @@
 
     public class CatsController : Controller
     {
-        public CatsController(HttpRequest request) 
-            : base(request)
-        {
-        }
-
+        [HttpGet]
         public HttpResponse Create() => View();
 
-        public HttpResponse Save()
-        {
-            var name = this.Request.Form["Name"];
-            var age = this.Request.Form["Age"];
-
-            return Text($"{name} - {age}");
-        }
+        [HttpPost]
+        public HttpResponse Save(string name, int age) 
+            => Text($"{name} - {age}");
     }
 }
