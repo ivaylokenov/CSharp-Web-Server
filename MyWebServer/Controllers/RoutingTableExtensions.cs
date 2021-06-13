@@ -6,15 +6,10 @@
     using System.Reflection;
     using MyWebServer.Http;
     using MyWebServer.Routing;
-    using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Text;
 
     public static class RoutingTableExtensions
     {
-        //TODO: Extract constants in a separate class. Backslash repeats in other files.
-        private const string ControllerKeyword = "Controller";
         private const string Backslash = "/";
         private static Type stringType = typeof(string);
         private static Type httpResponseType = typeof(HttpResponse);
@@ -45,19 +40,70 @@
 
             //Checks for name ending with controller and inheritance from base Controller type.
             var controllerTypes = assembly.GetTypes()
-                .Where(t => t.BaseType == typeof(Controller) && t.Name.EndsWith(ControllerKeyword));
+                .Where(t => !t.IsAbstract
+                    && t.IsAssignableTo(typeof(Controller))
+                    && t.Name.EndsWith(nameof(Controller)));
 
             foreach (var controller in controllerTypes)
             {
-                var genericGet = typeof(RoutingTableExtensions).GetMethod("MapGet", new Type[] { routingTable.GetType() }).MakeGenericMethod(controller);
-                //Static method, no object instance => null.
-                genericGet.Invoke(null, new object[] { routingTable });
+                var actions = controller.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(m => m.ReturnType.IsAssignableTo(httpResponseType));
 
-                //TODO: Set post routes as well.
-                //Currently can't find any specific characteristic to them that I can use reflection to find.
+                foreach (var action in actions)
+                {
+
+                    var httpMethod = HttpMethod.Get;
+
+                    var httpMethodAttribute = action
+                        .GetCustomAttribute<HttpMethodAttribute>();
+
+                    if (httpMethodAttribute != null)
+                    {
+                        httpMethod = httpMethodAttribute.HttpMethod;
+                    }
+
+                    var path = GetRoutePath(controller.Name, action.Name);
+
+                    var responseFunction = GetResponseFunction(action);
+
+                    routingTable.Map(httpMethod, path, responseFunction);
+
+                    MapDefaultRoutes(
+                        routingTable,
+                        httpMethod,
+                        controller.Name,
+                        action.Name,
+                        responseFunction);
+                }
+
             }
 
             return routingTable;
+        }
+
+        /// <summary>
+        /// Gets the proper path for the route, given controller and action strings.
+        /// </summary>
+        /// <param name="controller">The name of the controller.</param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        private static string GetRoutePath(string controller, string action)
+        {
+            controller = controller.Substring(0, controller.LastIndexOf("Controller"));
+
+            StringBuilder path = new StringBuilder(Backslash);
+
+            if(controller != "Home")
+            {
+                path.Append(controller).Append(Backslash);
+            }
+
+            if (action != "Index")
+            {
+                path.Append(action);
+            }
+
+            return path.ToString();
         }
 
         /// <summary>
