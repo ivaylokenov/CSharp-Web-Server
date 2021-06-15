@@ -1,0 +1,10 @@
+﻿<h1>All cats in the system:</h1>
+
+<ul>
+    @foreach (var cat in Model)
+    {
+        <li>
+            @cat.Name - @cat.Age
+        </li>
+    }
+</ul>
