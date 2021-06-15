@@ -20,7 +20,7 @@
 
         public HeaderCollection Headers { get; private set; }
 
-        public IReadOnlyDictionary<string, HttpCookie> Cookies { get; private set; }
+        public CookieCollection Cookies { get; private set; }
 
         public FormCollection Form { get; private set; }
 
@@ -82,25 +82,29 @@
 
             var path = urlParts[0];
             var query = urlParts.Length > 1
-                ? new QueryCollection(ParseQuery(urlParts[1]))
+                ? ParseQuery(urlParts[1])
                 : new QueryCollection();
 
             return (path, query);
         }
 
-        private static Dictionary<string, string> ParseQuery(string queryString) 
-            => HttpUtility.UrlDecode(queryString)
-                .Split('&')
-                .Select(part => part.Split('='))
-                .Where(part => part.Length == 2)
-                .ToDictionary(
-                    part => part[0], 
-                    part => part[1], 
-                    StringComparer.InvariantCultureIgnoreCase);
+        private static QueryCollection ParseQuery(string queryString)
+        {
+            var queryCollection = new QueryCollection();
+
+            var parsedResult = ParseQueryString(queryString);
+
+            foreach (var (name, value) in parsedResult)
+            {
+                queryCollection.Add(name, value);
+            }
+
+            return queryCollection;
+        }
 
         private static HeaderCollection ParseHeaders(IEnumerable<string> headerLines)
         {
-            var headerCollection = new Dictionary<string, HttpHeader>(StringComparer.InvariantCultureIgnoreCase);
+            var headerCollection = new HeaderCollection();
 
             foreach (var headerLine in headerLines)
             {
@@ -119,17 +123,15 @@
                 var headerName = headerParts[0];
                 var headerValue = headerParts[1].Trim();
 
-                var header = new HttpHeader(headerName, headerValue);
-
-                headerCollection[headerName] = header;
+                headerCollection.Add(headerName, headerValue);
             }
 
-            return new HeaderCollection(headerCollection);
+            return headerCollection;
         }
 
-        private static Dictionary<string, HttpCookie> ParseCookies(HeaderCollection headers)
+        private static CookieCollection ParseCookies(HeaderCollection headers)
         {
-            var cookieCollection = new Dictionary<string, HttpCookie>(StringComparer.InvariantCultureIgnoreCase);
+            var cookieCollection = new CookieCollection();
 
             if (headers.Contains(HttpHeader.Cookie))
             {
@@ -144,19 +146,17 @@
                     var cookieName = cookieParts[0].Trim();
                     var cookieValue = cookieParts[1].Trim();
 
-                    var cookie = new HttpCookie(cookieName, cookieValue);
-
-                    cookieCollection[cookieName] = cookie;
+                    cookieCollection.Add(cookieName, cookieValue);
                 }
             }
 
             return cookieCollection;
         }
 
-        private static HttpSession GetSession(Dictionary<string, HttpCookie> cookies)
+        private static HttpSession GetSession(CookieCollection cookies)
         {
-            var sessionId = cookies.ContainsKey(HttpSession.SessionCookieName)
-                ? cookies[HttpSession.SessionCookieName].Value
+            var sessionId = cookies.Contains(HttpSession.SessionCookieName)
+                ? cookies[HttpSession.SessionCookieName]
                 : Guid.NewGuid().ToString();
 
             if (!Sessions.ContainsKey(sessionId))
@@ -172,15 +172,30 @@
 
         private static FormCollection ParseForm(HeaderCollection headers, string body)
         {
-            var result = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+            var formCollection = new FormCollection();
 
             if (headers.Contains(HttpHeader.ContentType)
                 && headers[HttpHeader.ContentType] == HttpContentType.FormUrlEncoded)
             {
-                result = ParseQuery(body);
+                var parsedResult = ParseQueryString(body);
+
+                foreach (var (name, value) in parsedResult)
+                {
+                    formCollection.Add(name, value);
+                }
             }
 
-            return new FormCollection(result);
+            return formCollection;
         }
+
+        private static Dictionary<string, string> ParseQueryString(string queryString)
+            => HttpUtility.UrlDecode(queryString)
+                .Split('&')
+                .Select(part => part.Split('='))
+                .Where(part => part.Length == 2)
+                .ToDictionary(
+                    part => part[0],
+                    part => part[1],
+                    StringComparer.InvariantCultureIgnoreCase);
     }
 }

@@ -8,17 +8,13 @@
     {
         private readonly Dictionary<string, string> form;
 
-        public FormCollection(Dictionary<string, string> form)
-            => this.form = form;
-        public FormCollection() 
-            :this(new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase))
-        {
-        }
+        public FormCollection()
+            => this.form = new(StringComparer.InvariantCultureIgnoreCase);
 
-        public string this[string value]
-            => this.form[value];
+        public string this[string name]
+            => this.form[name];
 
-        public void Add(string name, string value) 
+        public void Add(string name, string value)
             => this.form[name] = value;
 
         public bool Contains(string name)
@@ -27,10 +23,10 @@
         public string GetValueOrDefault(string key)
              => this.form.GetValueOrDefault(key);
 
-        public IEnumerator<string> GetEnumerator() 
+        public IEnumerator<string> GetEnumerator()
             => form.Values.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator() 
+        IEnumerator IEnumerable.GetEnumerator()
             => this.GetEnumerator();
     }
 }

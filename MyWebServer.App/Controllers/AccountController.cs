@@ -51,15 +51,15 @@
         {
             const string cookieName = "My-Cookie";
 
-            if (this.Request.Cookies.ContainsKey(cookieName))
+            if (this.Request.Cookies.Contains(cookieName))
             {
                 var cookie = this.Request.Cookies[cookieName];
 
                 return Text($"Cookies already exist - {cookie}!");
             }
 
-            this.Response.AddCookie(cookieName, "My-Value");
-            this.Response.AddCookie("My-Second-Cookie", "My-Second-Value");
+            this.Response.Cookies.Add(cookieName, "My-Value");
+            this.Response.Cookies.Add("My-Second-Cookie", "My-Second-Value");
 
             return Text("Cookies set!");
         }
