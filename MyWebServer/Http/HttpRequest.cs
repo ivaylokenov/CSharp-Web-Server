@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Web;
     using MyWebServer.Http.Collections;
+    using MyWebServer.Services;
 
     public class HttpRequest
     {
@@ -28,7 +29,9 @@
 
         public HttpSession Session { get; private set; }
 
-        public static HttpRequest Parse(string request)
+        public ServiceCollection Services { get; private set; }
+
+        public static HttpRequest Parse(string request, ServiceCollection services)
         {
             var lines = request.Split(NewLine);
 
@@ -60,7 +63,8 @@
                 Cookies = cookies,
                 Session = session,
                 Body = body,
-                Form = form
+                Form = form,
+                Services = services
             };
         }
 

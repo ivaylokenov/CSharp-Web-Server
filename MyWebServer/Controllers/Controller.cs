@@ -21,7 +21,7 @@
             {
                 if (this.userIdentity == null)
                 {
-                    this.userIdentity = this.Request.Session.ContainsKey(UserSessionKey)
+                    this.userIdentity = this.Request.Session.Contains(UserSessionKey)
                         ? new UserIdentity { Id = this.Request.Session[UserSessionKey] }
                         : new();
                 }
