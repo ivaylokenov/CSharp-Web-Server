@@ -72,7 +72,6 @@
             catch (Exception)
             {
                 throw new InvalidOperationException($"Method '{method}' is not supported");
-                //return HttpMethod.Get;
             }
         }
 
