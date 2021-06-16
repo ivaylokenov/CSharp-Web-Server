@@ -1,2 +1,7 @@
 ﻿<h1>Hello from the dogs corner of the web site!</h1>
 <h2>My name is @Model.Name! I am a @Model.Breed! I am also @Model.Age years old!</h2>
+
+@if (Model.Age < 5)
+{
+    <h3>I am young and playful!</h3>
+}

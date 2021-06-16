@@ -42,7 +42,8 @@ Steps to create a similar web server from scratch:
 36. Remove the required constructor on the base Controller class and populate the request property automatically
 37. Introduce proper collections for headers, cookies, form and query
 38. Implement service collection and create controllers by using a dependendency resolver with reflection and recursion
-39. Add advanced view engine features
+39. Add advanced view engine features - conditionals statements and loops
+40. Introduce user information during view rendering
 
 Potential Tasks:
 - Cache
