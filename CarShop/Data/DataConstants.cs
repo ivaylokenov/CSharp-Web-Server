@@ -13,7 +13,7 @@
 
         public const int CarModelMinLength = 5;
         public const int CarPlateNumberMaxLength = 8;
-        public const string CarPlateNumberRegularExpression = @"/[A-Z]{2}[0-9]{4}[A-Z]{2}/g";
+        public const string CarPlateNumberRegularExpression = @"[A-Z]{2}[0-9]{4}[A-Z]{2}";
         public const int CarYearMinValue = 1900;
         public const int CarYearMaxValue = 2100;
     }

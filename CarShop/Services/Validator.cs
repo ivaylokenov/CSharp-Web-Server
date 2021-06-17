@@ -56,7 +56,12 @@
                 errors.Add($"Year '{model.Year}' is not valid. It must be between {CarYearMinValue} and {CarYearMaxValue}.");
             }
 
-            if (Regex.IsMatch(model.PlateNumber, CarPlateNumberRegularExpression))
+            if (!Uri.IsWellFormedUriString(model.Image, UriKind.Absolute))
+            {
+                errors.Add($"Image {model.Image} is not a valid URL.");
+            }
+
+            if (!Regex.IsMatch(model.PlateNumber, CarPlateNumberRegularExpression))
             {
                 errors.Add($"Plate number {model.PlateNumber} is not valid. It should be in format 'AA0000AA'.");
             }
