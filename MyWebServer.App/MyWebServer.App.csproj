@@ -26,6 +26,7 @@
     <None Remove="Views\Cats\All.cshtml" />
     <None Remove="Views\Cats\Create.cshtml" />
     <None Remove="Views\Dogs\Create.cshtml" />
+    <None Remove="Views\Home\HtmlView.html" />
     <None Remove="Views\Home\StaticFiles.cshtml" />
     <None Remove="Views\Layout.cshtml" />
   </ItemGroup>

@@ -7,6 +7,7 @@
     public class ViewResult : ActionResult
     {
         private const char PathSeparator = '/';
+        private readonly string[] ViewFileExtensions = { "html", "cshtml" };
 
         public ViewResult(
             HttpResponse response,
@@ -25,9 +26,9 @@
                 viewName = controllerName + PathSeparator + viewName;
             }
 
-            var viewPath = Path.GetFullPath($"./Views/" + viewName.TrimStart(PathSeparator) + ".cshtml");
+            var (viewPath, viewExists) = FindView(viewName);
 
-            if (!File.Exists(viewPath))
+            if (!viewExists)
             {
                 this.PrepareMissingViewError(viewPath);
 
@@ -45,12 +46,28 @@
                 viewContent = layoutContent.Replace("@RenderBody()", viewContent);
             }
 
-            if (model != null)
-            {
-                viewContent = viewEngine.RenderHtml(viewContent, model, userId);
-            }
+            viewContent = viewEngine.RenderHtml(viewContent, model, userId);
 
             this.SetContent(viewContent, HttpContentType.Html);
+        }
+
+        private (string, bool) FindView(string viewName)
+        {
+            string viewPath = null;
+            var exists = false;
+
+            foreach (var fileExtension in ViewFileExtensions)
+            {
+                viewPath = Path.GetFullPath($"./Views/" + viewName.TrimStart(PathSeparator) + $".{fileExtension}");
+
+                if (File.Exists(viewPath))
+                {
+                    exists = true;
+                    break;
+                }
+            }
+
+            return (viewPath, exists);
         }
 
         private void PrepareMissingViewError(string viewPath)

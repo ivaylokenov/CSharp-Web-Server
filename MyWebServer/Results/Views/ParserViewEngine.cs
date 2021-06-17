@@ -84,6 +84,11 @@
 
         private static string PopulateModelProperties(string content, string modelName, object model)
         {
+            if (model == null)
+            {
+                return content;
+            }
+
             var data = model
                 .GetType()
                 .GetProperties()
