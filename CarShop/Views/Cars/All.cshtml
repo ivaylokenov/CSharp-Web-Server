@@ -1,0 +1,22 @@
+﻿<h1 class="text-center mt-2">My Cars</h1>
+<div class="row mt-2 mb-4">
+    @foreach (var car in Model)
+    {
+        <div class="card col-6 col-lg-3 game-card">
+            <img src="@car.Image"
+                 class="card-img-top img-fluid card-image rounded" data-toggle="tooltip"
+                 data-placement="bottom" title="@car.Year @car.Model">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-center">Plate # @car.PlateNumber</li>
+                    <li class="list-group-item">
+                        <span class="bg-danger col-sm">Remaining Issues: @car.RemainingIssues</span>
+                        <span class="bg-success col-sm">Fixed Issues: @car.FixedIssues</span>
+                    </li>
+                </ul>
+                <a href="/Issues/CarIssues?carId=@car.Id" class="btn btn-block btn-primary">Check issues</a>
+            </div>
+        </div>
+    }
+
+</div>

@@ -4,6 +4,7 @@
     using MyWebServer.Identity;
     using MyWebServer.Results;
     using MyWebServer.Results.Views;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     public abstract class Controller
@@ -64,6 +65,12 @@
         protected ActionResult Html(string html)
             => new HtmlResult(this.Response, html);
 
+        protected ActionResult BadRequest()
+            => new BadRequestResult(this.Response);
+
+        protected ActionResult Unauthorized()
+            => new UnauthorizedResult(this.Response);
+
         protected ActionResult Redirect(string location)
             => new RedirectResult(this.Response, location);
 
@@ -75,6 +82,12 @@
 
         protected ActionResult View(object model, [CallerMemberName] string viewName = "")
             => this.GetViewResult(viewName, model);
+
+        protected ActionResult Error(string error)
+            => this.Error(new[] { error });
+
+        protected ActionResult Error(IEnumerable<string> errors)
+            => this.View("./Error", errors);
 
         private ActionResult GetViewResult(string viewName, object model)
             => new ViewResult(this.Response, this.ViewEngine, viewName, this.GetType().GetControllerName(), model, this.User.Id);

@@ -65,7 +65,7 @@
 
             if (service == null)
             {
-                throw new InvalidOperationException($"Service {typeof(TService).FullName} is not registered.");
+                throw new InvalidOperationException($"Service '{typeof(TService).FullName}' is not registered.");
             }
 
             configuration(service);

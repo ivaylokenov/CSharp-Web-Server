@@ -1,0 +1,48 @@
+.index-div {
+  text-align: center;
+  margin: 20px;
+  background-color: rgb(66, 66, 66);
+}
+
+.attack-stat {
+  border: 2px crimson solid;
+  padding-left: 10%;
+  padding-right: 10%;
+  border-radius: 10%;
+  font-weight: bolder;
+  font-size: large;
+  color: crimson;
+  float: left;
+}
+
+.attack-stat:hover {
+  background-color: rgb(92, 71, 75);
+}
+
+.health-stat {
+  border: 2px lightgreen solid;
+  padding-left: 10%;
+  padding-right: 10%;
+  border-radius: 10%;
+  font-weight: bolder;
+  font-size: large;
+  color: lightgreen;
+  float: right;
+}
+
+.health-stat:hover {
+  background-color: rgb(121, 143, 129);
+}
+
+.card-image {
+  transition: transform .3s;
+}
+
+.card-image:hover {
+  z-index: 1;
+  transform: scale(2);
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

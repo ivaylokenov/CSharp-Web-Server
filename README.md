@@ -46,6 +46,7 @@ Steps to create a similar web server from scratch:
 40. Introduce user information during view rendering
 
 Potential Tasks:
+- Introduce model state and automatic validation
 - Cache
 - Include the view files into the assemblies
 - Allow headers with the same name

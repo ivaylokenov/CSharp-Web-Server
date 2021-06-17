@@ -1,0 +1,54 @@
+﻿<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="page-header text-center">
+                    <h2 id="tables">Listed issues for: </h2>
+                    <h2 class="font-weight-bold font-italic">@Model.Year @Model.Model</h2>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-block btn-primary text-white mb-3" href="/Issues/Add?CarId=@Model.Id">Add a new Issue</a>
+                </div>
+
+                <div class="component">
+                    <table class="table table-hover">
+                        <thead class=" table-active">
+                            <tr>
+                                <th scope="col">Description</th>
+                                <th scope="col">Is it fixed?</th>
+                                <th scope="col" class="text-center">Fix Issue</th>
+                                <th scope="col" class="text-center">Delete Issue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var issue in Model.Issues)
+                            {
+                                <tr class="table-light">
+                                    <td>@issue.Description</td>
+                                    <td>
+                                        @if (issue.IsFixed)
+                                        {
+                                            <span>Yes</span>
+                                        }
+                                        @if (!issue.IsFixed)
+                                        {
+                                            <span>Not yet</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-block btn-primary text-white mb-3" href="/Issues/Fix?issueId=@issue.Id&CarId=@Model.Id">Fix Issue</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-block btn-primary text-white mb-3" href="/Issues/Delete?issueId=@issue.Id&CarId=@Model.Id">Delete Issue</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

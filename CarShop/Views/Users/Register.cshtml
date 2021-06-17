@@ -1,0 +1,43 @@
+﻿<h1 class="text-center mt-2">Register</h1>
+<hr class="bg-primary w-75">
+
+<form class="mx-auto w-50" method="post">
+    <div class="form-group">
+        <div class="label-holder textCol d-flex justify-content-center">
+            <label for="username" class="h4 mb-2 text-white">Username</label>
+        </div>
+        <input type="text" class="form-control" id="username" name="username" />
+    </div>
+    <div class="form-group">
+        <div class="label-holder text-white textCol d-flex justify-content-center">
+            <label for="email" class="h4 mb-2">Email</label>
+        </div>
+        <input type="email" class="form-control" id="email" name="email" />
+    </div>
+    <div class="form-group">
+        <div class="label-holder text-white textCol d-flex justify-content-center">
+            <label for="password" class="h4 mb-2">Password</label>
+        </div>
+        <input type="password" autocomplete="on" class="form-control" id="password" name="password" />
+    </div>
+    <div class="form-group">
+        <div class="label-holder text-white textCol d-flex justify-content-center">
+            <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
+        </div>
+        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" />
+    </div>
+
+    <div class="form-group">
+        <div class="text-white d-flex justify-content-center">
+            <label for="userType" class="h3 mb-2">Are you a mechanic or a client?</label>
+        </div>
+        <select class="custom-select" name="userType" id="userType">
+            <option value="Client">Client</option>
+            <option value="Mechanic">Mechanic</option>
+        </select>
+    </div>
+
+    <div class="button-holder d-flex justify-content-center">
+        <button type="submit" class="btn btn-block btn-primary text-white mb-3" value="Register">Register</button>
+    </div>
+</form>

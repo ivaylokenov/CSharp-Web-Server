@@ -45,6 +45,10 @@
             {
                 type = this.services[type];
             }
+            else if (type.IsInterface)
+            {
+                throw new InvalidOperationException($"Service '{type.FullName}' is not registered.");
+            }
 
             var constructors = type.GetConstructors();
 
