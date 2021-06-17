@@ -1,4 +1,4 @@
-﻿namespace MyWebServer.App.Models.Animals
+﻿namespace MyWebServer.Demo.Models.Animals
 {
     public class DogViewModel
     {

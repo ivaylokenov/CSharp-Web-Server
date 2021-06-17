@@ -1,6 +1,6 @@
-﻿namespace MyWebServer.App.Controllers
+﻿namespace MyWebServer.Demo.Controllers
 {
-    using MyWebServer.App.Models.Animals;
+    using MyWebServer.Demo.Models.Animals;
     using MyWebServer.Controllers;
     using MyWebServer.Http;
 

@@ -1,6 +1,6 @@
-﻿namespace MyWebServer.App.Controllers
+﻿namespace MyWebServer.Demo.Controllers
 {
-    using MyWebServer.App.Data;
+    using MyWebServer.Demo.Data;
     using MyWebServer.Controllers;
     using MyWebServer.Http;
     using System.Linq;

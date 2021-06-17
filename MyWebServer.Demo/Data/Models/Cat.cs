@@ -1,4 +1,4 @@
-﻿namespace MyWebServer.App.Data.Models
+﻿namespace MyWebServer.Demo.Data.Models
 {
     public class Cat
     {

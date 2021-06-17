@@ -1,10 +1,10 @@
-﻿namespace MyWebServer.App
+﻿namespace MyWebServer.Demo
 {
     using System.Threading.Tasks;
     using MyWebServer;
     using MyWebServer.Controllers;
-    using MyWebServer.App.Controllers;
-    using MyWebServer.App.Data;
+    using MyWebServer.Demo.Controllers;
+    using MyWebServer.Demo.Data;
     using MyWebServer.Results.Views;
 
     public class Startup

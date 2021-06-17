@@ -1,7 +1,7 @@
-﻿namespace MyWebServer.App.Data
+﻿namespace MyWebServer.Demo.Data
 {
     using System.Collections.Generic;
-    using MyWebServer.App.Data.Models;
+    using MyWebServer.Demo.Data.Models;
 
     public interface IData
     {

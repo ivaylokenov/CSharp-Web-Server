@@ -1,7 +1,7 @@
-﻿namespace MyWebServer.App.Controllers
+﻿namespace MyWebServer.Demo.Controllers
 {
     using System;
-    using MyWebServer.App.Models.Animals;
+    using MyWebServer.Demo.Models.Animals;
     using MyWebServer.Controllers;
     using MyWebServer.Http;
 
