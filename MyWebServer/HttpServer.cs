@@ -58,6 +58,21 @@
             return this;
         }
 
+        public HttpServer WithConfiguration<TService>(Action<TService> configuration)
+            where TService : class
+        {
+            var service = this.serviceCollection.Get<TService>();
+
+            if (service == null)
+            {
+                throw new InvalidOperationException($"Service {typeof(TService).FullName} is not registered.");
+            }
+
+            configuration(service);
+
+            return this;
+        }
+
         public async Task Start()
         {
             this.listener.Start();

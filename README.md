@@ -41,7 +41,7 @@ Steps to create a similar web server from scratch:
 35. Use reflection to analyze the action parameters and populate them automatically from the request
 36. Remove the required constructor on the base Controller class and populate the request property automatically
 37. Introduce proper collections for headers, cookies, form and query
-38. Implement service collection and create controllers by using a dependendency resolver with reflection and recursion
+38. Implement service collection with configuration and create controllers by using a dependendency resolver with reflection and recursion
 39. Add advanced view engine features - conditionals statements and loops
 40. Introduce user information during view rendering
 
@@ -50,3 +50,4 @@ Potential Tasks:
 - Include the view files into the assemblies
 - Allow headers with the same name
 - Make the setter of the controller request private
+- Introduce server features to separate the abstraction for routing and services
