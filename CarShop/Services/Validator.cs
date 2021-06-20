@@ -3,6 +3,7 @@
     using CarShop.Models.Cars;
     using CarShop.Models.Users;
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
 
@@ -27,6 +28,11 @@
             if (model.Password.Length < UserMinPassword || model.Password.Length > DefaultMaxLength)
             {
                 errors.Add($"The provided password is not valid. It must be between {UserMinPassword} and {DefaultMaxLength} characters long.");
+            }
+
+            if (model.Password.All(x => x == ' '))
+            {
+                errors.Add($"The provided password cannot be only whitespaces!");
             }
 
             if (model.Password != model.ConfirmPassword)

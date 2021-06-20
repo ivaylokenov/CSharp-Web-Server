@@ -7,11 +7,6 @@
     {
         public string HashPassword(string password)
         {
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                return string.Empty;
-            }
-
             // Create a SHA256   
             using var sha256Hash = SHA256.Create();
 
