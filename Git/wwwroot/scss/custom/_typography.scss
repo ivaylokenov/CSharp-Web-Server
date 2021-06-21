@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700');
+
+body {
+	font-weight: $font-weight-base;
+	font-family: $font-family-sans-serif;
+	color: $grey-800;
+}
+
+b {
+	font-weight: 700;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-weight: $headings-font-weight;
+    color: $dark;
+}
+
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
+	font-weight: 800;
+}
+
+@each $color,$value in $theme-colors {
+    .text-#{$color} {
+        @include text-color($value);
+    }
+}
+
+//blockquote
+.blockquote {
+	border-left: 0.2rem solid $primary;
+	font-size: $blockquote-font-size;
+	padding-left: 1.5rem;
+}
+
+.icon {
+	position: relative;
+	top: .2em;
+}
+
+.big-icon {
+	font-size: 3rem;
+}

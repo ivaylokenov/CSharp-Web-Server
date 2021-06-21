@@ -1,0 +1,58 @@
+@mixin transition($time, $type){
+    -webkit-transition: all $time $type;
+    -moz-transition: all $time $type;
+    -o-transition: all $time $type;
+    -ms-transition: all $time $type;
+    transition: all $time $type;
+}
+
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow; // iOS <4.3 & Android <4.1
+          box-shadow: $shadow;
+}
+
+// Opacity
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  // IE8 filter
+  $opacity-ie: ($opacity * 100);
+  filter: #{alpha(opacity=$opacity-ie)};
+}
+
+@mixin background-color($color) {
+	background-color: $color !important;
+}
+
+@mixin table-color($color) {
+	tbody,
+	tr,
+	th,
+	td {
+		background-color: rgba($color, 0.3);
+		border-color: rgba($color, 0.3);
+		color: darken($color, 40%);
+	}
+}
+
+@mixin table-hover($color) {
+	&:hover {
+		th, td {
+			background-color: rgba($color, 0.35);
+			border-color: rgba($color, 0.35);
+		}
+	}
+}
+
+@mixin background-image($x_url){
+		background-image: url($x_url);
+		background-position: center center;
+		background-size: cover;
+		position: relative;
+		width: 100%;
+		z-index: 1;
+}
+
+@mixin filter-color($color){
+	background-color: darken($color, 10%);
+}

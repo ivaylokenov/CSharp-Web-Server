@@ -1,0 +1,136 @@
+$body-bg: #fff;
+$body-color: #1D1C1D;
+
+$font-weight-light: 300;
+$font-weight-base: 400;
+$font-weight-bold: 600;
+
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-xl:                ($font-size-base * 1.5);
+$font-size-lg:                ($font-size-base * 1.25);
+$font-size-sm:                ($font-size-base * .875);
+$font-size-xs:                ($font-size-base * .75);
+
+// breakpoints
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+
+//Changing the theme colors
+$primary: #611F6A;
+$secondary: #071D5C;
+$success: #007A5B;
+$info: #1264A4;
+$warning: #ECB22F;
+$danger: #E01E5B;
+
+$bg-primary: #4A154B;
+$bg-secondary: #091A3D;
+$bg-success: #2EB67D;
+$bg-info: #167895;
+$bg-warning: #EBB12B;
+$bg-danger: #EB616A;
+$bg-dark: #1D1C1D;
+
+$white: #FFFFFF;
+$light: #F7F7F7;
+
+// $grey-100: #E0E0E0 !default;
+$grey-100: #F5F5F5 !default;
+// $grey-200: #C0C0C0 !default;
+$grey-200: #EBEAEB !default;
+// $grey-300: #A8A8A8 !default;
+$grey-300: #C0C0C0 !default;
+$grey-400: #909090 !default;
+$grey-500: #787878 !default;
+$grey-600: #686868 !default;   // Line footer color
+$grey-700: #484848 !default;
+$grey-800: #282828 !default;
+$grey-900: #181818 !default;
+$dark: 		 #212529 !default;
+
+$theme-colors: () !default;
+$theme-colors: map-merge((
+  "primary":      $primary,
+  "secondary":    $secondary,
+  "success":      $success,
+  "info":         $info,
+  "warning":      $warning,
+  "danger":       $danger,
+  "white":        $white,
+  "neutral":      $white,
+  "light":				$grey-200,
+  "dark":         $dark
+), $theme-colors);
+
+$bg-colors: () !default;
+$bg-colors: map-merge((
+  "primary":      $bg-primary,
+  "secondary":    $bg-secondary,
+  "success":      $bg-success,
+  "info":         $bg-info,
+  "warning":      $bg-warning,
+  "danger":       $bg-danger,
+  "light":				$light,
+  "white":        $white,
+  "neutral":      $white,
+  "dark":         $bg-dark
+), $bg-colors);
+
+//Changing the font family
+$font-family-sans-serif: "Raleway", sans-serif;
+
+//links
+$link-color:    	$info;
+$link-hover-decoration: none;
+
+// inputs and buttons
+$input-btn-padding-y:         .5rem;
+$input-btn-padding-x:         1rem;
+$input-btn-font-size:					.9rem;
+$input-btn-line-height:       1.5;
+$input-btn-border-radius: 		.25rem;
+
+$input-btn-padding-lg-y: 			.5rem;
+$input-btn-padding-lg-x:			1.2rem;
+$input-btn-font-size-lg: 			1.25rem;
+$input-btn-border-radius-lg: 	.3rem;
+
+$input-btn-padding-sm-y: 			.25rem;
+$input-btn-padding-sm-x:			.7rem;
+$input-btn-font-size-sm: 			.875rem;
+$input-btn-border-radius-sm: 	.2rem;
+
+$input-btn-focus-box-shadow: none;
+$btn-box-shadow: none;
+$btn-active-box-shadow: none;
+
+//typography
+$headings-font-weight: 700;
+
+//blockquote
+$blockquote-font-size: 1.1rem;
+
+// for mixins
+$fast-transition-time:           150ms       !default;
+$slow-transition-time:           370ms       !default;
+
+// No UI Slider
+
+$noui-target-bg:                  #eceeef !default;
+$noui-target-thickness:           5px !default;
+$noui-target-border-radius:       5px !default;
+$noui-target-border-color:        0 !default;
+$noui-target-box-shadow:          inset 0 1px 2px rgba(90,97,105,.1);
+
+$noui-slider-connect-bg:          $primary !default;
+$noui-slider-connect-disabled-bg: #b2b2b2 !default;
+
+$noui-handle-width:               15px !default;
+$noui-handle-bg:                  $primary !default;
+$noui-handle-border:              0 !default;
+$noui-handle-border-radius:       100% !default;
+
+$noui-origin-border-radius:       2px !default;

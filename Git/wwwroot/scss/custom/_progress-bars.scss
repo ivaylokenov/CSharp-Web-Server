@@ -1,0 +1,13 @@
+.progress {
+	height: .375rem;
+	margin-bottom: 1rem;
+	.progress-bar {
+		background-color: $bg-primary;
+	}
+	&.progress-sm {
+		height: .2rem;
+	}
+	&.progress-lg {
+		height: .5rem;
+	}
+}

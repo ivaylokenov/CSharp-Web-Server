@@ -1,0 +1,100 @@
+.btn,
+.navbar .navbar-nav > a.btn{
+    font-weight: $font-weight-bold;
+    @include input-size($input-btn-padding-y, $input-btn-padding-x, $input-btn-font-size, $input-btn-border-radius);
+    
+    @include transition($fast-transition-time, linear);
+
+    &:hover,
+    &:focus{
+        outline: 0 !important;
+    }
+    &:active,
+    &.active,
+    .open > &.dropdown-toggle {
+         @include box-shadow(none);
+         outline: 0 !important;
+    }
+
+    .badge{
+      margin: 0;
+    }
+    
+    &.btn-link {
+			background-color: transparent;
+		  &:hover,
+		  &:focus,
+		  &:active,
+		  &:active:focus {
+			  background-color: transparent;
+			  text-decoration: none;
+			}
+		}
+		
+		&.btn-lg {
+			@include input-size($input-btn-padding-lg-y, $input-btn-padding-lg-x, $input-btn-font-size-lg, $input-btn-border-radius-lg);
+		}
+		
+		&.btn-sm {
+			@include input-size($input-btn-padding-sm-y, $input-btn-padding-sm-x, $input-btn-font-size-sm, $input-btn-border-radius-sm);
+		}
+		
+		&.btn-pill {
+			border-radius: 4rem;
+		}
+		&.btn-icon {
+			padding: .5rem .8rem ;
+			border-radius: 4rem;
+			&.btn-sm {
+				padding: .3rem .55rem ;
+			}
+			&.btn-lg {
+				padding: .65rem 1rem;
+			}
+		}
+}
+
+// Apply the mixin to the buttons
+@each $color, $value in $theme-colors {
+    .btn-#{$color} {
+        @include btn-style($value);
+    }
+}
+
+@each $color,
+$value in $theme-colors {
+    .btn-outline-#{$color} {
+        @include btn-outline-style($value);
+/*
+        &.btn-icon {		
+					@include hover-padding(.4rem, .7rem);
+					&.btn-sm {
+						padding: .2rem .45rem ;
+					}
+					&.btn-lg {
+						padding: .5rem .9rem;
+					}
+        }
+*/
+    }
+}
+//links
+a:not(.nav-link):not(.navbar-brand):not(.btn) {
+	color: $info;
+	font-weight: 600;
+	border-bottom: 1px solid $info;
+	font-weight: 500;
+	text-decoration: none;
+	
+	&:hover {
+		color: $info;
+		border-bottom: 1.5px solid $info;
+	}
+}
+
+a.text-primary {
+	color: $primary;
+	&:hover {
+		color: darken($primary, 6%) !important;
+	}
+}

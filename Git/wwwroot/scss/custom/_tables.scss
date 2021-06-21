@@ -1,0 +1,21 @@
+@each $color,$value in $bg-colors {
+    .table-#{$color} {
+        @include table-color($value);
+    }
+}
+
+.table-hover {
+	@each $color,$value in $bg-colors {
+	    .table-#{$color} {
+	        @include table-hover($value);
+	    }
+	}	
+}
+
+.table-dark,
+.table-secondary {
+	td,
+	th {
+		color: $white;
+	}
+}

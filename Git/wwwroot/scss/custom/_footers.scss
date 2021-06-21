@@ -1,0 +1,27 @@
+.footer-1 {
+	padding: 2rem 0rem 1rem;
+	.footer-menu {
+		margin-bottom: 0rem;
+		li {
+			padding: 0rem .8rem;
+			a {
+				color: $primary !important;
+				border-bottom: 0 !important;
+				&:hover,
+				&:focus,
+				&:active	{
+					color: darken($primary, 10%) !important;
+				}
+			}
+		}
+	}
+	.copyright {
+		padding-top: .5rem;
+		p {
+			padding: .5rem;
+			i {
+				margin: 1rem .1rem;
+			}
+		}
+	}
+}

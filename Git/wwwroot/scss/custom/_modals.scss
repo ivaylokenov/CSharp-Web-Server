@@ -1,0 +1,23 @@
+.modal {
+	.modal-dialog {
+		.modal-content {
+			border: none;
+			border-radius: 0rem;
+			padding: 1rem;
+			
+			.modal-header {
+				border-bottom: none;
+			}
+			.modal-footer {
+				border-top: none;
+			}
+		}
+	}
+}
+
+.modal-backdrop {
+	background-color: darken($primary, 25%);
+	&.show {
+		opacity: 0.8;
+	}
+}

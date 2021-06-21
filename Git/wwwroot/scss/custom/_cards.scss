@@ -1,0 +1,28 @@
+.card {
+	border-radius: 0;
+	border: none;
+	box-shadow: 0 0 2rem rgba(0,0,0,.1);
+	transition: transform 800ms cubic-bezier(.165,.84,.44,1);
+	.card-header,
+	.card-footer {
+		background-color: transparent;
+		border: none;
+		padding: 1rem;
+		border-radius: 0rem;
+	}
+	
+	.card-body {
+		padding: 1rem;
+	}
+	
+	.card-img {
+		border-radius: 0;
+	}
+	
+	&:not(.no-hover){
+		&:hover {
+			box-shadow: 0 0 2rem rgba(0,0,0,.19);
+			transform: scale(1.03);
+		}
+	}
+}

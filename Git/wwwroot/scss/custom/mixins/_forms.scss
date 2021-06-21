@@ -1,0 +1,107 @@
+@mixin hover-padding($padding-y , $padding-x) {
+	  &:hover,
+	  &:focus,
+	  &:active,
+	  &.active,
+	  &:active:focus,
+	  &:active:hover,
+	  &.active:focus,
+	  &.active:hover,
+	  .show > &.dropdown-toggle,
+	  .show > &.dropdown-toggle:focus,
+	  .show > &.dropdown-toggle:hover {		
+		  padding: $padding-y $padding-x;
+		}	
+}
+
+@mixin btn-style($color) {
+  background-color: $color;
+	border: 1px solid $color;
+	&:not(:disabled){
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  &:active:focus,
+  &:active:hover,
+  &.active:focus,
+  &.active:hover,
+  .show > &.dropdown-toggle,
+  .show > &.dropdown-toggle:focus,
+  .show > &.dropdown-toggle:hover {
+      background-color: darken($color, 6%);
+      border: 1px solid darken($color, 6%);
+      box-shadow: none;
+  }
+	}
+  &:not([data-action]):hover{
+      box-shadow:  none;
+  }
+
+  &.disabled,
+  &:disabled,
+  &[disabled],
+  fieldset[disabled] {
+      background-color: $color;
+      border: 1px solid $color;
+  }
+}
+
+@mixin btn-outline-style($color) {
+	border: 1px solid $color;
+	color: $color;
+
+	  &:hover,
+	  &:focus,
+	  &:active,
+	  &.active,
+	  &:active:focus,
+	  &:active:hover,
+	  &.active:focus,
+	  &.active:hover,
+	  .show > &.dropdown-toggle,
+	  .show > &.dropdown-toggle:focus,
+	  .show > &.dropdown-toggle:hover {
+	      background-color: $color;
+	      border-color: $color;
+/*
+	      border: 2px solid $color;
+	      box-shadow: none;
+*/
+/*
+	      color: $color;
+	      padding: .4375rem .915rem;
+*/
+// 	      font-weight: 700;
+	  }	
+	  
+/*
+	&.btn-lg {
+		@include hover-padding(.4375rem, 1.05rem);	
+	}
+	
+	&.btn-sm {
+		@include hover-padding(.1875rem, .6rem);	
+	}
+*/
+}
+
+@mixin input-size($padding-vertical, $padding-horizontal, $font-size, $border){
+   font-size: $font-size;
+   border-radius: $border;
+   padding: $padding-vertical $padding-horizontal;
+}
+
+@mixin input-style($color1, $color2) {
+	border: 1px solid $color1;
+	@include box-shadow(none);
+	
+	&:hover,
+  &:focus,
+  &:active{
+	  border: 1px solid $color2;
+	  @include box-shadow(none);
+	}	
+}
+
+

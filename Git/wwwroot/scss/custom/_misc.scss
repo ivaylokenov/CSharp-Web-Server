@@ -1,0 +1,23 @@
+.circle {
+	width: .6rem;
+	height: .6rem;
+	border-radius: 50%;
+	background-color: $primary;
+}
+.bubble {
+	@include bubble(1.2rem);
+}
+.big-bubble {
+	@include bubble(5rem);
+}
+
+.rotate-circle {
+	position: absolute;
+	animation: rotate 5s linear infinite;
+}
+
+.rotate-bubble {
+	position: absolute;
+	animation: rotate 10s linear infinite;
+}
+

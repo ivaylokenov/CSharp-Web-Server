@@ -1,0 +1,24 @@
+.badge {
+	border-radius: .5rem;
+	padding: .2rem .4rem;
+	@each $color, $value in $theme-colors {
+    &.badge-#{$color} {
+				background-color: transparent;
+				color: $value;
+				border: 1px solid rgba($value, 0.4);
+    }
+	}
+		
+	
+	&.badge-pill {
+		@each $color, $value in $theme-colors {
+	    &.badge-#{$color} {
+					background-color: $value;
+					color: $white;
+	    }
+		}
+		&.badge-light {
+			color: $dark;
+		}
+	}
+}

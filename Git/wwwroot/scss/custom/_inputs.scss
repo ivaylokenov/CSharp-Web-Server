@@ -1,0 +1,93 @@
+.form-control,
+.custom-select,
+.custom-file {
+	font-weight: $font-weight-base;
+	height: 2.375rem;
+	@include input-style($grey-500, $primary);
+	@include input-size($input-btn-padding-y, $input-btn-padding-x, $input-btn-font-size, $input-btn-border-radius);
+	@include box-shadow(none);
+	
+	&.form-control-lg,
+	&.custom-select-lg {
+		@include input-size(1rem, $input-btn-padding-x, $input-btn-font-size, $input-btn-border-radius);
+		line-height: 2rem;
+		height: 3rem;
+	}
+		
+	&.form-control-sm,
+	&.custom-select-sm {
+		@include input-size(0.7rem, $input-btn-padding-x, $input-btn-font-size, $input-btn-border-radius);
+		height: 1.95rem;
+	}
+
+	&:disabled {
+		background-color: transparent;
+		@include input-style($grey-200, $grey-200);
+	}
+
+	&.is-valid {
+		color: $success;
+		background-image: none;
+		@include input-style(darken($success, 10%), $success);
+	}
+	
+	&.is-invalid {
+		color: $danger;
+		background-image: none;
+		@include input-style(darken($danger, 10%), $danger);
+	}
+}
+
+.form-group {
+	label {
+		font-weight: 600;
+		margin-top: .5rem;
+	}
+}
+.valid-feedback {
+	color: $success;
+}
+
+.invalid-feedback {
+	color: $danger;
+}
+
+.input-group {
+	.form-control:not(:first-child) {
+		padding-left: 3rem;
+		border-radius: .25rem;
+	}
+	.form-control:not(:last-child) {
+		padding-right: 3rem;
+		border-radius: .25rem;		
+	}
+	.input-group-prepend,
+	.input-group-append {
+		position: absolute;
+		top: 0;
+		z-index: 1000;
+		border: 0;
+	}
+	.input-group-prepend {
+		left: 0;
+	}
+	.input-group-append {
+		right: 0;
+	}
+	.input-group-text {
+		background-color: transparent;
+		color: rgba($primary, 0.9);
+		border: none;
+		padding: .7rem .8rem;
+		&.disabled {
+			color: rgba($primary, 0.6);
+		}
+	}
+	.custom-file-label {
+		border: 0;
+		&::after {
+			background-color: transparent;
+			color: $primary;
+		}
+	}
+}

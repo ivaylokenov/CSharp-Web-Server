@@ -1,0 +1,26 @@
+.dropdown-toggle:focus {
+	box-shadow: 0 none;
+}
+
+.dropdown-menu {
+	border: 1px solid $grey-200;
+	padding: .8rem;
+	box-shadow: 0 0 2rem rgba(0,0,0,.1);
+	transition: all .1s;
+	a.dropdown-item {
+			border-bottom: none !important;
+			border-radius: .2rem;
+			color: $dark !important;
+			text-align: left;
+			padding: 0.6rem;
+			font-size: 1rem;
+			line-height: 1rem;
+			font-weight: 500;
+			&:hover,
+			&:focus,
+			&:active {
+				color: $info !important;
+				background-color: $grey-100;
+			}
+	}
+}

@@ -1,0 +1,392 @@
+@import 'custom/variables';
+@import 'custom/mixins';
+
+.space {
+	margin-top: 5rem;
+}
+
+.index {
+	.section {
+		margin-top: 2rem;
+		.header {
+			margin-top: 4rem;
+		}
+
+		.component {
+			margin-top: 2rem;
+		}
+	}
+	.section-typography {
+		p {
+			margin-bottom: 0rem;
+		}
+		h1, h2, h3, h4, h5, h6 {
+			margin-bottom: 0rem;
+			margin-top: 0rem;
+		}
+	}
+
+	.demo-background {
+		min-height: 200px;
+		@include background-image("../img/purple.jpg");
+	}
+
+	.bubbles {
+		position: relative;
+		width: 100%;
+
+		.bubble-1 {
+			top: 32rem;
+			left: 2rem;
+		}
+		.bubble-2 {
+			top: 22rem;
+			left: 11rem;
+		}
+		.bubble-3 {
+			top: 7rem;
+			left: 18rem;
+		}
+		.bubble-4 {
+			top: 30rem;
+			right: 3rem;
+		}
+		.bubble-5 {
+			top: 10rem;
+			left: 3rem;
+		}
+		.bubble-6 {
+			top: -8rem;
+			left: 43rem;
+		}
+		.bubble-7 {
+			top: -5rem;
+			right: 20rem;
+		}
+		.bubble-8 {
+			top: 47rem;
+			right: 5rem;
+		}
+		.bubble-9 {
+			top: 13rem;
+			right: 28rem;
+		}
+		.bubble-10 {
+			top: 40rem;
+			right: 10rem;
+		}
+		.bubble-11 {
+			top: 45rem;
+			left: 7rem;
+		}
+		.bubble-12 {
+			top: 13rem;
+			right: 10rem;
+		}
+		.bubble-13 {
+			top: -4rem;
+			left: 15rem;
+		}
+		.circle-1 {
+			top: 14rem;
+			left: 14rem;
+		}
+		.circle-2 {
+			top: 16rem;
+			left: 25rem;
+		}
+		.circle-3 {
+			top: 3rem;
+			left: 2rem;
+		}
+		.circle-4 {
+			top: -7rem;
+			left: 29rem;
+		}
+		.circle-5 {
+			top: 30rem;
+			left: 18rem;
+		}
+		.circle-6 {
+			top: 28rem;
+			right: 35rem;
+		}
+		.circle-7 {
+			top: 13rem;
+			right: 2rem;
+		}
+		.circle-8 {
+			top: 7rem;
+			right: 13rem;
+		}
+		.circle-9 {
+			top: 24rem;
+			right: 15rem;
+		}
+		.circle-10 {
+			top: -3rem;
+			right: 7rem;
+		}
+	}
+
+	.page-hero {
+		padding: 3rem 1rem;
+
+		.credits {
+			margin-top: 6rem;
+		}
+	}
+
+	.intro {
+		padding: 4rem 0rem;
+		.desc {
+			padding: 1rem 0rem 3rem;
+		}
+	}
+
+	.color {
+		margin: 1.5rem 0rem;
+
+		.swatch {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			margin: .5rem 0rem 1rem;
+		}
+		.title {
+			font-weight: 500;
+			font-size: 1.1rem;
+		}
+	}
+
+	.buttons {
+		.btn {
+			margin-top: .5rem;
+		}
+	}
+
+	.examples {
+		padding: 5rem 0rem;
+		margin-top: 5rem;
+	}
+
+	.documentation, .download {
+		padding: 10rem .9rem;
+	}
+
+	@media screen and (min-width: $md) {
+		.page-hero {
+			padding: 12rem 0rem 6rem;
+		}
+		.credits {
+			margin-top: 12rem;
+		}
+  }
+
+}
+
+.register {
+	.navbar {
+		margin-bottom: -80px;
+		z-index: 100;
+		padding-left: 0px;
+		padding-right: 0px;
+		.row {
+			flex-grow: 1;
+		}
+	}
+	.full-picture {
+		min-height: 100vh;
+		margin-right: -15px;
+		overflow: hidden;
+		@include background-image("../img/dog-9.jpg");
+	}
+	.register-form {
+		margin: 130px 0px 80px;
+	}
+	.footer {
+		margin-top: 0px;
+	}
+
+	@media screen and (max-width: $md) {
+		.navbar {
+			padding-left: 15px;
+			padding-right: 15px;
+			overflow: hidden;
+		}
+		.register-form {
+			margin-bottom: 30px;
+		}
+    .full-picture {
+	    margin-left: -15px;
+    }
+  }
+}
+
+.profile {
+	.lead {
+		font-size: 1.1rem;
+	}
+	.info {
+		margin-top: 6rem;
+		padding: 3rem 0rem;
+	}
+	.stats {
+		.posts {
+			margin: 1rem;
+		}
+	}
+	.profile-tabs {
+		min-height: 50vh;
+		.tab-pane {
+			padding: 2rem 0rem;
+		}
+	}
+	.square {
+	    position: relative;
+	    width:  100%;
+	    height: 300px;
+	    background-position: 50% 50%;
+	    background-repeat:   no-repeat;
+	    background-size:     cover;
+	    margin: 1rem 0rem;
+	}
+}
+
+.landing {
+
+	.header {
+		padding: 1rem 0rem;
+	}
+	.features {
+		padding: 4rem 0rem 7rem;
+		.feature {
+			padding: .9rem;
+		}
+	}
+	.blog-posts {
+		padding: 5rem 0rem;
+		.text-center {
+			padding: 2rem 0rem 5rem;
+		}
+	}
+	.testimonials {
+		padding: 5rem 0rem;
+		.info {
+			padding: 2rem 0rem 5rem;
+		}
+		.testimonial {
+			padding: .7rem;
+			.big-bubble {
+				margin-bottom: 2rem;
+			}
+		}
+	}
+	.cta {
+		padding: 6rem 1rem;
+	}
+	.contact {
+		.bg-primary {
+			padding: 8rem 0rem 9rem;
+		}
+		.bg-light {
+			padding: 6rem 0rem;
+		}
+		.card {
+			margin-top: -11rem;
+		}
+	}
+
+	@media screen and (min-width: $md) {
+		.navbar {
+			padding: 1.2rem 0rem;
+		}
+		.header {
+			margin-top: 5rem;
+			padding: 4rem 0rem 7rem;
+	  }
+	  .form-subscribe {
+		  max-width: 85%;
+	  }
+  }
+}
+
+.documentation {
+	.sidebar {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 100;
+		padding-top: 80px;
+		padding-left: 30px;
+		.sidebar-sticky {
+			top: 0;
+			height: calc(100vh - 100px);
+			overflow-x: hidden;
+			overflow-y: auto;
+			h6 {
+				font-size: 1rem;
+				margin-top: 1.5rem;
+				color: $grey-700;
+			}
+			.nav {
+				.nav-item {
+					a {
+						margin: .3rem 0rem;
+						padding: 0rem;
+						color: $grey-600;
+						font-size: .9rem;
+						line-height: 1;
+						display: inline-block;
+						&:hover,
+						&:focus,
+						&:active,
+						&.active {
+							color: darken($info, 10%);
+						}
+						&:active,
+						&.active {
+							font-weight: 500;
+							border-bottom: .1rem solid darken($info, 10%);
+						}
+					}
+				}
+			}
+		}
+	}
+	.content {
+		padding: 70px 70px 150px;
+		h2 {
+			margin-top: 4rem;
+		}
+		h4 {
+			margin-top: 2rem;
+		}
+		p {
+			max-width: 650px;
+		}
+		pre {
+			background-color: $light;
+			color: $dark;
+			padding: 1rem .8rem;
+			font-size: .9rem;
+			line-height: 1rem;
+			margin-top: 1rem;
+		}
+		.component {
+			margin: 1.5rem 0rem;
+		}
+		.token {
+			&.tag {
+				color: $primary;
+			}
+			&.attr-name {
+				color: $success;
+			}
+			&.attr-value {
+				color: $info;
+			}
+		}
+	}
+}

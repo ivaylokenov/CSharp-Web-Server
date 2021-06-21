@@ -1,0 +1,193 @@
+.custom-control-label {
+	cursor: pointer;
+  font-size: 0.9rem;
+  padding-top: .2rem;
+  padding-left: 0.2rem;
+  
+	&::before,
+	&::after {
+		width: 1.2rem;
+		height: 1.2rem;
+	}
+}
+// Checkboxes
+.custom-checkbox {
+    .custom-control-input {
+        &:checked {
+            ~ .custom-control-label {
+                &::before {
+	                	background-color: $primary;
+                    border-color: $primary;
+                    color: $primary;
+                }
+            }
+        }
+
+        &:disabled {
+            ~ .custom-control-label {
+                &::before {
+                    border-color: rgba($primary, .45);
+                }
+            }
+
+            &:checked {
+	             ~ .custom-control-label {
+                &::before {
+	                	background-color: rgba($primary, .45);
+                    border-color: rgba($primary, .45);
+                }
+              }
+            }
+        }
+    }
+}
+
+// Radios
+.custom-radio {
+    .custom-control-input {
+        &:checked {
+            ~ .custom-control-label {
+                &::before {
+	                	background-color: $primary;
+                    border-color: $primary;
+                }
+            }
+        }
+
+        &:disabled {
+            ~ .custom-control-label {
+                &::before {
+                    border-color: rgba($primary, .45);
+                }
+            }
+
+            &:checked {
+	             ~ .custom-control-label {
+                &::before {
+	                  background-color: rgba($primary, .45);
+                    border-color: rgba($primary, .45);
+                }
+              }
+            }
+        }
+    }
+
+}
+
+// Toggles
+.custom-switch {
+	.custom-control-label {
+		padding-left: 1.3rem;
+		
+			&::before{
+				width: 3rem;
+				height: 1.5rem;
+				border-radius: 1rem;
+			}
+			
+			&::after {
+				height: 1.25rem;
+				width: 1.25rem;
+				border-radius: 50%;
+			}
+		}
+    .custom-control-input {
+        &:checked {
+            ~ .custom-control-label {
+                &::before {
+	                	background-color: $primary;
+                    border-color: $primary;
+                    
+                }
+                &::after {
+	                transform: translateX(1.5rem);
+                }
+            }
+        }
+
+        &:disabled {
+            ~ .custom-control-label {
+                &::before {
+                    border-color: rgba($primary, .45);
+                }
+            }
+
+            &:checked {
+	             ~ .custom-control-label {
+                &::before {
+	                  background-color: rgba($primary, .45);
+                    border-color: rgba($primary, .45);
+                }
+              }
+            }
+        }
+    }	
+}
+
+// Toggles
+/*
+.custom-toggle {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 1.5rem;
+
+    input {
+        display: none;
+
+        &:checked {
+             + .custom-toggle-slider {
+                border: 1px solid $primary;
+
+                &:before {
+                    background: $grey-200;
+                    transform: translateX(1.625rem);
+                }  
+            }
+        }
+        
+        &:disabled {
+            + .custom-toggle-slider {
+                border: 1px solid $primary;
+            }
+
+            &:checked {
+                + .custom-toggle-slider {
+                    border: lighten($primary, 45%);
+
+                    &:before {
+                        background-color: lighten($primary, 45%);
+                    }
+                }
+            }
+        }
+    }
+}
+*/
+
+/*
+.custom-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: $custom-control-indicator-border-width solid $input-border-color;
+    border-radius: 34px !important;
+    background-color: transparent;
+    
+
+    &:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 2px;
+        bottom: 2px;
+        border-radius: 50% !important;
+        background-color: $custom-toggle-slider-bg;
+        transition: $input-transition;
+    }
+}
+*/

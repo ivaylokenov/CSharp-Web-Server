@@ -1,0 +1,44 @@
+@mixin nav-tabs-style($color) {
+		&.active {
+			&,
+			&:hover {
+			border-bottom: 2px solid $color;
+			border-color: $color;
+			font-weight: bold;
+			color: $color;
+			}
+			i {
+				color: $color;
+			}
+		}
+		
+		&:hover {
+			border-bottom: 1px solid $color;
+			color: $color;
+			i {
+				color: $color;
+			}
+		}
+}
+
+@mixin nav-pills-style($color) {
+		&.active {
+			background-color: $color;
+			box-shadow: 0px 3px 5px rgba($color, 0.2);
+			color: $white;
+			font-weight: bold;
+			&:hover,
+			&:focus,
+			i {
+				color: $white !important;
+			}
+		}
+		
+		&:hover,
+		&:focus {
+			color: $color;
+			i {
+				color: $color;
+			}
+		}
+}

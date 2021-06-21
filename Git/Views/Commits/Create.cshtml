@@ -1,0 +1,14 @@
+﻿<h1 class="text-center mt-2">Commit to @Model.Name</h1>
+<hr class="bg-primary w-75">
+<form class="mx-auto w-50" method="post">
+    <div class="form-group">
+        <div class="text-dark d-flex justify-content-center">
+            <label for="description" class="h3 mb-2">Description</label>
+        </div>
+        <textarea row="20" class="form-control" id="description" name="description"></textarea>
+    </div>
+    <input type="text" hidden id="id" name="id" value="@Model.Id" />
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-block btn-primary text-white mb-3">Commit</button>
+    </div>
+</form>

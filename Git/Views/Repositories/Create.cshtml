@@ -1,0 +1,22 @@
+﻿<h1 class="text-center mt-2">Create a Repository</h1>
+<hr class="bg-primary w-75">
+<form class="mx-auto w-50" method="post">
+    <div class="form-group">
+        <div class="text-dark d-flex justify-content-center">
+            <label for="name" class="h3 mb-2">Name</label>
+        </div>
+        <input type="text" class="form-control" id="name" name="name" />
+    </div>
+    <div class="form-group">
+        <div class="text-dark d-flex justify-content-center">
+            <label for="repositoryType" class="h3 mb-2">Select type:</label>
+        </div>
+        <select class="custom-select" name="repositoryType" id="repositoryType">
+            <option value="Public">Public</option>
+            <option value="Private">Private</option>
+        </select>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-block btn-primary text-white mb-3">Create</button>
+    </div>
+</form>

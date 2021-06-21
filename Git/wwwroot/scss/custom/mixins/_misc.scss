@@ -1,0 +1,28 @@
+@mixin bubble($width) {
+	&,
+	&.bubble-bottom-right,
+	&.bubble-bottom-left,
+	&.bubble-top-right,
+	&.bubble-top-left {
+		width: $width;
+		height: $width;
+		background-color: $primary;
+	}
+	
+	&,
+	&.bubble-bottom-left  {
+			border-radius: 50% 50% 50% 0%;
+	}
+	
+	&.bubble-bottom-right {
+		border-radius: 50% 50% 0% 50%;
+	}
+	
+	&.bubble-top-right {
+		border-radius: 50% 0% 50% 50%;
+	}
+	
+	&.bubble-top-left {
+		border-radius: 0% 50% 50% 50%;
+	}	
+}

@@ -1,0 +1,24 @@
+@each $color,$value in $bg-colors {
+    .bg-#{$color} {
+        @include background-color($value);
+    }
+}
+
+.filter {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $dark;
+  opacity: .45;
+
+    
+	@each $color,$value in $theme-colors {
+	    &.filter-#{$color} {
+	        @include filter-color($value);
+	    }
+	}    
+}

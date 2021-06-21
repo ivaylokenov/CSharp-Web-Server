@@ -1,0 +1,77 @@
+﻿body {
+    color: white;
+}
+
+a {
+    color: wheat;
+}
+
+footer {
+    color: black;
+    text-align: center;
+}
+
+.top-border-line {
+    margin-top: 5px;
+}
+
+.bottom-border-line {
+    margin-top: 20px;
+}
+
+.heading-container {
+    border-bottom: solid;
+    border-color: white;
+    padding-top: 10px;
+}
+
+.primary-separator {
+    border-top: solid;
+    border-color: purple;
+    margin-bottom: 10px;
+}
+
+.bottom-buffer-md {
+    margin-bottom: 15px;
+}
+
+.bottom-buffer-xs {
+    margin-bottom: 10px;
+}
+
+.navbar {
+    background-color: purple; 
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+}
+.nav-link:hover {
+    color: white;
+}
+
+.navbar-brand {
+    color: whitesmoke;
+}
+
+.jumbotron {
+    background-color: purple;
+}
+
+.suls-bg-color {
+    background-color: purple;
+    color: white;
+}
+
+.suls-text-color {
+    color: purple;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}

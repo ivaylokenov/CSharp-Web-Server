@@ -1,0 +1,18 @@
+.alert {
+	@each $color, $value in $bg-colors {
+    &.alert-#{$color} {
+				background-color: $value;
+				color: $white;
+				border: none;
+    }
+	}
+	a {
+		color: $white !important;
+		border-bottom: 1px solid $white !important;
+		&:hover,
+		&:focus,
+		&:active {
+			border-bottom: 2px solid $white !important;
+		}
+	}
+}

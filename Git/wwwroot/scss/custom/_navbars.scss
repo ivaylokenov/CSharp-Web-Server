@@ -1,0 +1,43 @@
+.navbar {
+	padding: 1.2rem 1rem;
+	
+	.navbar-brand {
+		font-weight: 800;
+	}
+	
+	.nav-link {
+		font-weight: 500;
+		@include opacity(0.9);
+	}
+}
+
+.navbar-dark {
+	.navbar-nav {
+		.nav-link {
+			color: rgba($white, 0.9);
+			
+			&:hover,
+			&:active,
+			&:focus {
+				color: rgba($white, 1);
+			}
+		}
+	}
+}
+
+.navbar-light {
+	.navbar-nav {
+		.nav-link {
+			color: rgba($dark, 0.9);
+			&:hover,
+			&:active,
+			&:focus {
+				color: rgba($dark, 1);
+			}
+		}
+	}
+}
+
+.navbar-transparent {
+	background-color: transparent;
+}
