@@ -88,7 +88,19 @@
 
                 var parameterValues = GetParameterValues(controllerAction, request);
 
-                return (HttpResponse)controllerAction.Invoke(controllerInstance, parameterValues);
+                try
+                {
+                    return (HttpResponse)controllerAction.Invoke(controllerInstance, parameterValues);
+                }
+                catch (Exception exception)
+                {
+                    if (exception is TargetInvocationException targetInvocationException)
+                    {
+                        exception = targetInvocationException.InnerException;
+                    }
+
+                    throw new InvalidOperationException($"Action '{controllerAction.Name}' in '{controllerAction.DeclaringType.Name}' throws an '{exception.GetType().Name}' with message '{exception.Message}'.");
+                };
             };
 
         private static TController CreateController<TController>(HttpRequest request)

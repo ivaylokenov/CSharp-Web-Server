@@ -5,6 +5,6 @@
 
     public class HomeController : Controller
     {
-        public HttpResponse Index() => View();
+        public HttpResponse Index(string name) => View(name.Length);
     }
 }
