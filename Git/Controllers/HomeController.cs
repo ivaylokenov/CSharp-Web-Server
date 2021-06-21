@@ -5,6 +5,14 @@
 
     public class HomeController : Controller
     {
-        public HttpResponse Index(string name) => View(name.Length);
+        public HttpResponse Index()
+        {
+            if (this.User.IsAuthenticated)
+            {
+                return Redirect("/Repositories/All");
+            }
+
+            return View();
+        }
     }
 }

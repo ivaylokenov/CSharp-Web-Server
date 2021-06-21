@@ -1,6 +1,9 @@
 ﻿namespace Git
 {
     using System.Threading.Tasks;
+    using Git.Data;
+    using Git.Services;
+    using Microsoft.EntityFrameworkCore;
     using MyWebServer;
     using MyWebServer.Controllers;
     using MyWebServer.Results.Views;
@@ -13,7 +16,12 @@
                     .MapStaticFiles()
                     .MapControllers())
                 .WithServices(services => services
+                    .Add<GitDbContext>()
+                    .Add<IValidator, Validator>()
+                    .Add<IPasswordHasher, PasswordHasher>()
                     .Add<IViewEngine, CompilationViewEngine>())
+                .WithConfiguration<GitDbContext>(context => context
+                    .Database.Migrate())
                 .Start();
     }
 }

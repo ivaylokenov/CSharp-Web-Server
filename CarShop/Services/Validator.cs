@@ -30,9 +30,9 @@
                 errors.Add($"The provided password is not valid. It must be between {UserMinPassword} and {DefaultMaxLength} characters long.");
             }
 
-            if (model.Password.All(x => x == ' '))
+            if (model.Password.Any(x => x == ' '))
             {
-                errors.Add($"The provided password cannot be only whitespaces!");
+                errors.Add($"The provided password cannot contain whitespaces.");
             }
 
             if (model.Password != model.ConfirmPassword)
