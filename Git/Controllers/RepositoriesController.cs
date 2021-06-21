@@ -25,9 +25,22 @@
 
         public HttpResponse All()
         {
-            var repositores = this.data
+            var repositoriesQuery = this.data
                 .Repositories
-                .Where(r => r.IsPublic)
+                .AsQueryable();
+
+            if (this.User.IsAuthenticated)
+            {
+                repositoriesQuery = repositoriesQuery
+                    .Where(r => r.IsPublic || r.OwnerId == this.User.Id);
+            }
+            else
+            {
+                repositoriesQuery = repositoriesQuery
+                    .Where(r => r.IsPublic);
+            }
+
+            var repositores = repositoriesQuery
                 .OrderByDescending(r => r.CreatedOn)
                 .Select(r => new RepositoryListingViewModel
                 {
