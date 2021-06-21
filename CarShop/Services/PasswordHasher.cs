@@ -11,7 +11,6 @@
             {
                 return string.Empty;
             }
-            
             // Create a SHA256   
             using var sha256Hash = SHA256.Create();
 
