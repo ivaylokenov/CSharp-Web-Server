@@ -86,6 +86,7 @@
             return Redirect("/Cars/All");
         }
 
+        [Authorize]
         public HttpResponse Logout()
         {
             this.SignOut();
