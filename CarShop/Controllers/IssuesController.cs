@@ -18,6 +18,81 @@
             this.data = data;
         }
 
+
+        [Authorize]
+        public HttpResponse Add()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public HttpResponse Add(string carId,string description)
+        {
+            var car = this.data.Cars.FirstOrDefault(c => c.Id == carId);
+
+            if (car == null)
+            {
+                return Error("This car does not exists.");
+            }
+
+            var issue = new Issue
+            {
+                Car = car,
+                CarId = carId,
+                Description = description,
+                IsFixed = false,
+            };
+
+            this.data.Issues.Add(issue);
+
+            this.data.SaveChanges();
+
+            return Redirect($"/Issues/CarIssues?carId={carId}");
+        }
+
+        [Authorize]
+        public HttpResponse Delete(string issueId,string carId)
+        {
+            var issue = this.data.Issues.FirstOrDefault(i => i.Id == issueId && i.CarId == carId);
+            if (issue==null)
+            {
+                return Error("Issue does not exists.");
+            }
+
+            this.data.Issues.Remove(issue);
+
+            this.data.SaveChanges();
+
+            return Redirect($"/Issues/CarIssues?carId={carId}");
+        }
+
+        [Authorize]
+        public HttpResponse Fix(string issueId, string carId)
+        {
+            var issue = this.data.Issues.FirstOrDefault(i => i.Id == issueId && i.CarId == carId);
+            if (issue == null)
+            {
+                return Error("Issue does not exists.");
+            }
+
+            if (issue.IsFixed==true)
+            {
+                return Redirect($"/Issues/CarIssues?carId={carId}");
+            }
+
+            if (!userService.IsMechanic(this.User.Id))
+            {
+                return Unauthorized();
+            }
+
+            issue.IsFixed = true;
+
+            this.data.SaveChanges();
+
+            return Redirect($"/Issues/CarIssues?carId={carId}");
+        }
+        
         [Authorize]
         public HttpResponse CarIssues(string carId)
         {
