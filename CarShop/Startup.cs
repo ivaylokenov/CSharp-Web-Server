@@ -16,7 +16,13 @@
                     .MapStaticFiles()
                     .MapControllers())
                 .WithServices(services => services
+                    .Add<CarShopDbContext>()
+                    .Add<IValidator, Validator>()
+                    .Add<IPasswordHasher, PasswordHasher>()
+                    .Add<IUserService, UserService>()
                     .Add<IViewEngine, CompilationViewEngine>())
+                .WithConfiguration<CarShopDbContext>(context => context
+                    .Database.Migrate())
                 .Start();
     }
 }

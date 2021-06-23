@@ -16,5 +16,7 @@
         public const string CarPlateNumberRegularExpression = @"[A-Z]{2}[0-9]{4}[A-Z]{2}";
         public const int CarYearMinValue = 1900;
         public const int CarYearMaxValue = 2100;
+
+        public const int IssueMinDescription = 5;
     }
 }
