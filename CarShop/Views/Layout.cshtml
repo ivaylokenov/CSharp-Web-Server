@@ -17,28 +17,21 @@
 
             <div class="collapse navbar-collapse dropright" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    @if (User == null)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-white active h5" href="/Users/Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white active h5" href="/Users/Register">Register</a>
-                        </li>
-                    }
-                    
-                    @if (User != null)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-white active h5" href="/Cars/Add">Add Car</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white active h5" href="/Cars/All">My Cars</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-danger active h5" href="/Users/Logout">Logout</a>
-                        </li>
-                    }
+                    <li class="nav-item">
+                        <a class="nav-link text-white active h5" href="/Users/Login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white active h5" href="/Users/Register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white active h5" href="/Cars/Add">Add Car</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white active h5" href="/Cars/All">My Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger active h5" href="/Users/Logout">Logout</a>
+                    </li>
                 </ul>
             </div>
         </nav>
