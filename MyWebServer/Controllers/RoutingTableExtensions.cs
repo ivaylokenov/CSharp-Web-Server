@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Reflection;
     using MyWebServer.Http;
@@ -202,7 +203,7 @@
 
                         property.SetValue(
                             parameterValue, 
-                            Convert.ChangeType(propertyValue, property.PropertyType));
+                            Convert.ChangeType(propertyValue, property.PropertyType, CultureInfo.InvariantCulture));
                     }
 
                     parameterValues[i] = parameterValue;
