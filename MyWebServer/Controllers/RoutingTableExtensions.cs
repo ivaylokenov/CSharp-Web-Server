@@ -109,13 +109,14 @@
 
         private static Controller CreateController(Type controllerType, HttpRequest request)
         {
-            var controller = (Controller)request.Services.CreateInstance(controllerType);
+            var controller = request.Services.CreateInstance(controllerType);
 
             controllerType
+                .BaseType
                 .GetProperty("Request", BindingFlags.Instance | BindingFlags.NonPublic)
                 .SetValue(controller, request);
 
-            return controller;
+            return (Controller) controller;
         }
 
         private static void MapDefaultRoutes(

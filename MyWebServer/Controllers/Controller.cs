@@ -14,7 +14,7 @@
         private UserIdentity userIdentity;
         private IViewEngine viewEngine;
 
-        protected HttpRequest Request { get; init; }
+        protected HttpRequest Request { get; private init; }
 
         protected HttpResponse Response { get; private init; } = new HttpResponse(HttpStatusCode.OK);
 
